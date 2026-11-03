@@ -1,0 +1,787 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>José Miguel Cerda</title>
+<meta name="description" content="Ecología funcional de plantas, teledetección y ciencia de datos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Yellowtail&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   COLORES Y TIPOGRAFÍA — cambia aquí el acento si quieres otro
+   ============================================================ */
+:root{
+  --paper:#E6E5E2;     /* fondo claro (gris papel) */
+  --sheet:#F8F7F4;     /* papel blanco del borde rasgado */
+  --ink:#000000;       /* tinta */
+  --night:#1D1D1D;     /* fondo de las bandas oscuras */
+  --mute:#6B6A66;      /* texto secundario */
+  --accent:#FF1F8E;    /* acento (rosa). Prueba #FF5A1F para naranja */
+  --display:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --script:"Yellowtail", cursive;
+  --gutter:clamp(16px, 5vw, 72px);
+  --maxw:1200px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:15px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+a{color:inherit}
+img,svg{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+[tabindex="-1"]:focus{outline:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+
+/* ---------- cabecera ---------- */
+.top{
+  position:sticky;top:0;z-index:20;background:var(--paper);
+  border-bottom:1px solid transparent;transition:border-color .2s;
+}
+.top.scrolled{border-bottom-color:rgba(0,0,0,.12)}
+.top .wrap{display:flex;align-items:center;gap:32px;height:76px}
+.logo{font-family:var(--script);font-size:34px;line-height:1;text-decoration:none;white-space:nowrap}
+.tabs{position:relative;display:flex;gap:6px;margin-left:auto;list-style:none;padding:0;margin-block:0}
+.tabs a{
+  display:block;padding:10px 14px;text-decoration:none;
+  font-family:var(--display);font-weight:600;font-size:13px;
+  font-variation-settings:"wdth" 110;letter-spacing:.02em;
+}
+.tabs a[aria-current="page"]{color:var(--ink)}
+.tabs a:not([aria-current="page"]){color:#55544f}
+.tabs a:hover{color:var(--ink)}
+.tab-bar{
+  position:absolute;bottom:2px;left:0;height:2px;width:0;background:var(--accent);
+  transition:transform .35s cubic-bezier(.6,.05,.2,1), width .35s cubic-bezier(.6,.05,.2,1);
+}
+
+/* ---------- páginas ---------- */
+.page[hidden]{display:none}
+.band{position:relative;padding:clamp(64px,9vw,120px) 0}
+.band.dark{background:var(--night);color:var(--sheet)}
+.band.dark .mute{color:#A9A8A3}
+.mute{color:var(--mute)}
+
+/* bordes de papel rasgado (se generan con JS) */
+.rip{position:absolute;left:0;width:100%;height:46px;pointer-events:none}
+.rip.top-edge{top:-45px}
+.rip.bottom-edge{bottom:-45px;transform:scaleY(-1)}
+
+h1,h2,h3{font-family:var(--display);margin:0;font-weight:800;line-height:.95}
+h2{font-size:clamp(2.2rem,5vw,3.6rem);font-variation-settings:"wdth" 125;letter-spacing:-.01em}
+h3{font-size:1.25rem;font-variation-settings:"wdth" 112;font-weight:700;line-height:1.15}
+p{margin:0 0 1em;max-width:62ch}
+.lead{font-size:16px;max-width:52ch}
+.accent{color:var(--accent)}
+
+/* ---------- INICIO / hero ---------- */
+.hero{padding:clamp(32px,5vw,64px) 0 clamp(80px,9vw,120px)}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:40px;align-items:center}
+.hero h1{
+  font-size:clamp(3.2rem,8.6vw,7.4rem);line-height:.86;
+  font-variation-settings:"wdth" 125;letter-spacing:-.02em;
+}
+.hero .field{
+  margin:28px 0 22px;font-family:var(--display);font-weight:700;
+  font-variation-settings:"wdth" 118;font-size:15px;color:var(--accent);line-height:1.3;
+}
+.hero .lead{margin-bottom:34px}
+.social{display:flex;flex-wrap:wrap;gap:22px;font-size:12px;padding:0;margin:0;list-style:none}
+.social a{text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px}
+.social a:hover{color:var(--accent)}
+.hero-art{width:100%;max-width:560px;justify-self:end}
+
+.themes{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,4vw,56px);margin-top:56px}
+.themes h3{margin-bottom:14px}
+.themes .sq{width:12px;height:12px;background:var(--accent);margin-bottom:22px}
+
+.now{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start}
+.now ul{margin:0;padding:0;list-style:none}
+.now li{padding:18px 0;border-top:1px solid rgba(0,0,0,.18);display:grid;grid-template-columns:150px 1fr;gap:20px}
+.now li:last-child{border-bottom:1px solid rgba(0,0,0,.18)}
+.now .when{font-family:var(--display);font-weight:700;font-variation-settings:"wdth" 110}
+
+/* ---------- cabecera de cada sección ---------- */
+.page-head .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:end}
+.page-head .art{justify-self:end;width:100%;max-width:380px}
+.page-head p{margin-top:24px}
+.btn{
+  display:inline-block;margin-top:8px;padding:12px 22px;border:2px solid currentColor;
+  font-family:var(--display);font-weight:700;font-size:13px;font-variation-settings:"wdth" 115;
+  text-decoration:none;letter-spacing:.03em;background:transparent;color:inherit;cursor:pointer;
+}
+.btn:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.dark .btn:hover{background:var(--sheet);color:var(--night);border-color:var(--sheet)}
+
+/* ---------- CV ---------- */
+.cv-grid{display:grid;grid-template-columns:220px 1fr;gap:20px 56px}
+.cv-grid > h3{padding-top:6px}
+.entries{list-style:none;margin:0 0 48px;padding:0}
+.entries li{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:16px 0;border-top:1px solid rgba(255,255,255,.18)}
+.entries .yr{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 120;color:var(--accent)}
+.entries strong{font-family:var(--display);font-weight:700;font-variation-settings:"wdth" 108;font-size:16px;display:block;line-height:1.3;margin-bottom:4px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 48px;padding:0;list-style:none}
+.chips li{border:1px solid rgba(255,255,255,.4);padding:4px 12px;font-size:13px}
+
+/* ---------- colaboraciones ---------- */
+.project{margin-bottom:72px}
+.project > header{display:grid;grid-template-columns:220px 1fr;gap:56px;margin-bottom:8px}
+.people{list-style:none;margin:0;padding:0}
+.people li{
+  display:grid;grid-template-columns:220px 1fr 1.3fr;gap:56px;padding:22px 0;
+  border-top:1px solid rgba(0,0,0,.18);align-items:baseline;
+}
+.people .name{font-family:var(--display);font-weight:800;font-size:1.35rem;font-variation-settings:"wdth" 112;line-height:1.1}
+.people .role{font-size:13px;color:var(--mute)}
+
+/* ---------- blog ---------- */
+.posts{max-width:820px}
+.post{border-top:2px solid var(--ink)}
+.post:last-child{border-bottom:2px solid var(--ink)}
+.post summary{
+  list-style:none;cursor:pointer;display:grid;grid-template-columns:130px 1fr 28px;gap:20px;
+  align-items:baseline;padding:24px 0;
+}
+.post summary::-webkit-details-marker{display:none}
+.post time{font-size:13px;color:var(--mute)}
+.post .ttl{font-family:var(--display);font-weight:800;font-size:1.45rem;font-variation-settings:"wdth" 118;line-height:1.1}
+.post .tag{display:inline-block;margin-top:8px;font-size:12px;color:var(--accent)}
+.post .plus{justify-self:end;position:relative;width:16px;height:16px}
+.post .plus::before,.post .plus::after{content:"";position:absolute;background:var(--ink);transition:transform .25s}
+.post .plus::before{left:0;top:7px;width:16px;height:2px}
+.post .plus::after{left:7px;top:0;width:2px;height:16px}
+.post[open] .plus::after{transform:scaleY(0)}
+.post .body{padding:0 0 32px 150px}
+.post .body h4{font-family:var(--display);font-weight:700;font-variation-settings:"wdth" 108;margin:1.4em 0 .4em;font-size:15px}
+.blog-filter{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 32px;padding:0;list-style:none}
+
+/* ---------- contribuciones ---------- */
+.filter{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 40px;padding:0;list-style:none}
+.filter button{
+  font-family:var(--body);font-size:13px;padding:6px 14px;cursor:pointer;
+  background:transparent;color:inherit;border:1px solid rgba(255,255,255,.4);
+}
+.blog-filter button{border-color:rgba(0,0,0,.3);font-family:var(--body);font-size:13px;padding:6px 14px;cursor:pointer;background:transparent}
+.filter button[aria-pressed="true"],.blog-filter button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.works{list-style:none;margin:0;padding:0}
+.works li{display:grid;grid-template-columns:90px 1fr 150px;gap:28px;padding:22px 0;border-top:1px solid rgba(255,255,255,.18)}
+.works li[hidden]{display:none}
+.works .yr{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 120;font-size:1.1rem}
+.works .t{font-family:var(--display);font-weight:700;font-variation-settings:"wdth" 106;font-size:17px;line-height:1.3;display:block;margin-bottom:4px}
+.works .type{font-size:12px;color:var(--accent);text-align:right}
+.works .status{display:inline-block;margin-top:6px;font-size:12px;border:1px solid rgba(255,255,255,.35);padding:1px 8px}
+.counts{font-size:13px;margin:-20px 0 32px}
+
+/* ---------- pie ---------- */
+footer{padding:64px 0 40px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:end}
+footer .big{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 125;font-size:clamp(1.6rem,4vw,2.6rem);text-decoration:none;line-height:1}
+footer .big:hover{color:var(--accent)}
+
+/* ---------- ilustraciones ---------- */
+.ink{fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.dark .ink{stroke:var(--sheet)}
+.fill-paper{fill:var(--paper)}
+.dark .fill-paper{fill:var(--night)}
+.dot{fill:var(--accent)}
+.thin{stroke-width:.8;opacity:.45}
+.dash{stroke-dasharray:4 6}
+
+/* ---------- móvil ---------- */
+@media (max-width:900px){
+  .top .wrap{flex-direction:column;align-items:flex-start;height:auto;gap:4px;padding-top:12px}
+  .tabs{margin-left:-14px;max-width:calc(100% + 14px);overflow-x:auto;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .top nav{width:100%;min-width:0}
+  .tabs a{white-space:nowrap}
+  .hero .wrap,.page-head .wrap,.now{grid-template-columns:1fr}
+  .hero-art{justify-self:center;max-width:420px}
+  .page-head .art{justify-self:start;max-width:300px}
+  .themes{grid-template-columns:1fr}
+  .cv-grid,.project > header{grid-template-columns:1fr;gap:12px}
+  .people li{grid-template-columns:1fr;gap:4px}
+  .now li{grid-template-columns:1fr;gap:4px}
+  .entries li{grid-template-columns:1fr;gap:2px}
+  .works li{grid-template-columns:1fr;gap:4px}
+  .works .type{text-align:left}
+  .post summary{grid-template-columns:1fr 28px}
+  .post time{grid-column:1}
+  .post .ttl-wrap{grid-column:1}
+  .post .plus{grid-column:2;grid-row:1 / span 2}
+  .post .body{padding-left:0}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+
+<!-- Símbolo de hoja reutilizado en las ilustraciones -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="leaf" viewBox="-2 -14 54 28" overflow="visible">
+      <path d="M0 0 C10 -11 34 -12 48 0 C34 12 10 11 0 0Z" class="fill-paper" />
+      <path d="M0 0 C10 -11 34 -12 48 0 C34 12 10 11 0 0Z M2 0 L44 0 M13 0 L19 -6 M13 0 L19 6 M24 0 L30 -6.5 M24 0 L30 6.5 M34 0 L39 -5 M34 0 L39 5" class="ink" style="stroke-width:1.3"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="logo" href="#inicio">jm cerda</a>
+    <nav aria-label="Secciones">
+      <ul class="tabs" id="tabs">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#cv">CV</a></li>
+        <li><a href="#colaboraciones">Colaboraciones</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contribuciones">Contribuciones</a></li>
+        <li aria-hidden="true" class="tab-bar" id="tab-bar"></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- =========================================================
+     INICIO
+     ========================================================= -->
+<section class="page" id="inicio" aria-labelledby="h-inicio">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1 id="h-inicio" tabindex="-1">José<br>Miguel<br>Cerda</h1>
+        <p class="field">Ecología funcional de plantas,<br>teledetección y ciencia de datos</p>
+        <p class="lead">Estudio cómo medir la diversidad funcional de las plantas desde la parcela de campo hasta el píxel de satélite, con foco en los ecosistemas mediterráneos de Chile central. Hoy trabajo en el CSIC, en Madrid.</p>
+        <ul class="social">
+          <li><a href="mailto:tu.correo@ejemplo.com">Correo</a></li>
+          <li><a href="#">Google Scholar</a></li>
+          <li><a href="#">ORCID</a></li>
+          <li><a href="#">GitHub</a></li>
+        </ul>
+      </div>
+
+      <!-- Ilustración: arbusto, huella del satélite y píxeles -->
+      <svg class="hero-art" viewBox="0 0 560 600" role="img" aria-label="Dibujo de un arbusto observado por un satélite, con píxeles que suben desde las hojas">
+        <defs>
+          <clipPath id="fp"><ellipse cx="300" cy="546" rx="176" ry="27"/></clipPath>
+        </defs>
+        <!-- huella y rejilla de píxeles -->
+        <g clip-path="url(#fp)" class="ink thin">
+          <path d="M120 520 L480 520 M120 529 L480 529 M120 538 L480 538 M120 547 L480 547 M120 556 L480 556 M120 565 L480 565"/>
+          <path d="M140 515V580 M162 515V580 M184 515V580 M206 515V580 M228 515V580 M250 515V580 M272 515V580 M294 515V580 M316 515V580 M338 515V580 M360 515V580 M382 515V580 M404 515V580 M426 515V580 M448 515V580 M470 515V580"/>
+        </g>
+        <ellipse cx="300" cy="546" rx="176" ry="27" class="ink"/>
+        <path d="M444 108 L126 544 M450 108 L474 546" class="ink dash thin" style="opacity:.7"/>
+
+        <!-- satélite -->
+        <g transform="translate(446 82) rotate(-18)" class="ink">
+          <rect x="-18" y="-14" width="36" height="28" rx="2" class="fill-paper"/>
+          <path d="M-18 -6 H18 M-6 -14 V14"/>
+          <rect x="-80" y="-9" width="56" height="18" class="fill-paper"/>
+          <path d="M-61 -9 V9 M-42 -9 V9 M-80 0 H-24 M-24 0 H-18"/>
+          <rect x="24" y="-9" width="56" height="18" class="fill-paper"/>
+          <path d="M43 -9 V9 M62 -9 V9 M24 0 H80 M18 0 H24"/>
+          <path d="M-6 14 L-8 22 H8 L6 14"/>
+          <path d="M0 -14 V-26"/><circle cx="0" cy="-29" r="3"/>
+        </g>
+
+        <!-- tallos -->
+        <g class="ink" style="stroke-width:2">
+          <path d="M300 546 C298 480 292 420 296 360 C300 300 286 262 290 196"/>
+          <path d="M298 478 C272 452 240 430 200 412"/>
+          <path d="M296 424 C330 396 362 372 398 334"/>
+          <path d="M294 336 C270 306 248 284 222 252"/>
+          <path d="M292 282 C320 252 346 236 372 206"/>
+          <path d="M297 508 C330 490 362 478 394 462"/>
+        </g>
+        <!-- hojas -->
+        <g>
+          <use href="#leaf" width="54" height="28" transform="translate(200 412) rotate(200) translate(-2 -14)"/>
+          <use href="#leaf" width="54" height="28" transform="translate(232 428) rotate(140) translate(-2 -14)"/>
+          <use href="#leaf" width="54" height="28" transform="translate(252 446) rotate(215) translate(-2 -14)"/>
+          <use href="#leaf" width="54" height="28" transform="translate(398 334) rotate(-40) translate(-2 -14)"/>
+          <use href="#leaf" width="54" height="28" transform="translate(360 374) rotate(-5) translate(-2 -14)"/>
+          <use href="#leaf" width="54" height="28" transform="translate(340 388) rotate(-80) translate(-2 -14)"/>
+          <use href="#leaf" width="54" height="28" transform="translate(222 252) rotate(230) translate(-2 -14)"/>
+          <use href="#leaf" width="54" height="28" transform="translate(250 286) rotate(170) translate(-2 -14)"/>
+          <use href="#leaf" width="54" height="28" transform="translate(240 270) rotate(260) translate(-2 -14)"/>
+          <use href="#leaf" width="54" height="28" transform="translate(372 206) rotate(-50) translate(-2 -14)"/>
+          <use href="#leaf" width="54" height="28" transform="translate(340 236) rotate(10) translate(-2 -14)"/>
+          <use href="#leaf" width="54" height="28" transform="translate(330 244) rotate(-100) translate(-2 -14)"/>
+          <use href="#leaf" width="54" height="28" transform="translate(290 196) rotate(-95) translate(-2 -14)"/>
+          <use href="#leaf" width="54" height="28" transform="translate(290 200) rotate(-130) translate(-2 -14)"/>
+          <use href="#leaf" width="54" height="28" transform="translate(292 202) rotate(-60) translate(-2 -14)"/>
+          <use href="#leaf" width="54" height="28" transform="translate(394 462) rotate(-15) translate(-2 -14)"/>
+          <use href="#leaf" width="54" height="28" transform="translate(360 478) rotate(30) translate(-2 -14)"/>
+          <use href="#leaf" width="54" height="28" transform="translate(296 360) rotate(-150) translate(-2 -14)"/>
+          <use href="#leaf" width="54" height="28" transform="translate(296 352) rotate(-30) translate(-2 -14)"/>
+        </g>
+        <!-- hierbas -->
+        <path d="M160 552 l-6 -18 M160 552 l2 -20 M160 552 l9 -15 M420 548 l-5 -16 M420 548 l3 -19 M420 548 l10 -13 M236 560 l-4 -12 M236 560 l3 -14" class="ink"/>
+        <!-- píxeles que suben hacia el satélite -->
+        <g class="dot">
+          <rect x="318" y="160" width="12" height="12"/>
+          <rect x="344" y="138" width="10" height="10"/>
+          <rect x="368" y="150" width="7" height="7"/>
+          <rect x="380" y="118" width="9" height="9"/>
+          <rect x="404" y="128" width="6" height="6"/>
+          <rect x="412" y="104" width="5" height="5"/>
+          <rect x="258" y="178" width="8" height="8"/>
+          <rect x="196" y="320" width="10" height="10"/>
+          <rect x="420" y="396" width="8" height="8"/>
+          <rect x="178" y="470" width="6" height="6"/>
+          <rect x="426" y="290" width="5" height="5"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="band dark">
+    <svg class="rip top-edge" data-seed="3" aria-hidden="true"></svg>
+    <div class="wrap">
+      <h2>Qué investigo</h2>
+      <div class="themes">
+        <div>
+          <div class="sq"></div>
+          <h3>Diversidad funcional de plantas</h3>
+          <p class="mute">Cómo varían los rasgos de las especies dentro de una comunidad, y qué dice esa variación sobre el funcionamiento del ecosistema.</p>
+        </div>
+        <div>
+          <div class="sq"></div>
+          <h3>Teledetección a varias escalas</h3>
+          <p class="mute">Hasta qué punto un píxel captura la diversidad que medimos en el suelo. Trato la escala espacial como una propiedad del propio proceso de observación.</p>
+        </div>
+        <div>
+          <div class="sq"></div>
+          <h3>Datos de campo representativos</h3>
+          <p class="mute">Bases de datos de parcelas como Parcelas-CL, y el problema de escalar resultados cuando los datos de campo no cubren todo el territorio.</p>
+        </div>
+      </div>
+    </div>
+    <svg class="rip bottom-edge" data-seed="8" aria-hidden="true"></svg>
+  </div>
+
+  <div class="band">
+    <div class="wrap now">
+      <h2>Ahora</h2>
+      <ul>
+        <li><span class="when">2026–hoy</span><span>En el CSIC (Madrid), modelando relaciones entre biodiversidad y funcionamiento en sabanas.</span></li>
+        <li><span class="when">Sept. 2026</span><span>Defendí mi tesis doctoral sobre el monitoreo escalable de la diversidad funcional de plantas.</span></li>
+        <li><span class="when">En curso</span><span>Publicando los capítulos de la tesis: una revisión sistemática, un estudio multiescala y la base de datos Parcelas-CL.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     CV
+     ========================================================= -->
+<section class="page" id="cv" aria-labelledby="h-cv" hidden>
+  <div class="band page-head">
+    <div class="wrap">
+      <div>
+        <h2 id="h-cv" tabindex="-1">Curriculum<br>vitae</h2>
+        <p class="lead">Ecólogo con formación doctoral en ciencia de datos. Combino trabajo de campo, teledetección y modelos estadísticos.</p>
+        <!-- Sube tu CV en PDF al repositorio con el nombre cv.pdf -->
+        <a class="btn" href="cv.pdf" download>Descargar CV en PDF</a>
+      </div>
+      <!-- Ilustración: parcela de muestreo -->
+      <svg class="art" viewBox="0 0 320 220" role="img" aria-label="Dibujo de una parcela de muestreo con estacas y plantas">
+        <path d="M40 150 L200 170 L280 110 L120 95 Z" class="ink"/>
+        <path d="M66.7 131.7 L226.7 150 M93.3 113.3 L253.3 130 M93.3 156.7 L173.3 100 M146.7 163.3 L226.7 105" class="ink thin"/>
+        <path d="M40 150 V170 M200 170 V192 M280 110 V128 M120 95 V110" class="ink" style="stroke-width:2.5"/>
+        <path d="M110 140 l-5 -16 M110 140 l2 -18 M110 140 l8 -13 M180 128 l-4 -14 M180 128 l2 -17 M180 128 l8 -12 M150 112 l-3 -12 M150 112 l2 -14 M218 146 l-5 -15 M218 146 l2 -18 M218 146 l9 -12" class="ink"/>
+        <use href="#leaf" width="54" height="28" transform="translate(70 70) rotate(-30) scale(.9) translate(-2 -14)"/>
+        <g class="dot"><rect x="236" y="54" width="10" height="10"/><rect x="258" y="38" width="7" height="7"/><rect x="276" y="56" width="5" height="5"/></g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="band dark">
+    <svg class="rip top-edge" data-seed="21" aria-hidden="true"></svg>
+    <div class="wrap cv-grid">
+      <h3>Experiencia</h3>
+      <ul class="entries">
+        <li><span class="yr">2026–hoy</span><div><strong>Investigador, CSIC (Madrid)</strong><span class="mute">Relaciones biodiversidad–funcionamiento en sabanas mediante simulación con BOSSE, junto a Javier Pacheco-Labrador.</span></div></li>
+        <li><span class="yr">[año]–2026</span><div><strong>Investigador doctoral, Data Observatory Foundation</strong><span class="mute">Monitoreo de la diversidad funcional de plantas con datos de campo y teledetección.</span></div></li>
+      </ul>
+
+      <h3>Formación</h3>
+      <ul class="entries">
+        <li><span class="yr">2026</span><div><strong>Doctorado en Ciencia de Datos, Universidad Adolfo Ibáñez</strong><span class="mute">Tesis: <em>Towards a Scalable Framework for Monitoring Plant Functional Diversity</em>. Dirigida por Javier Lopatin y Dylan Craven.</span></div></li>
+        <li><span class="yr">[año]</span><div><strong>[Título anterior], [Universidad]</strong><span class="mute">[Breve descripción o tesis]</span></div></li>
+      </ul>
+
+      <h3>Herramientas</h3>
+      <ul class="chips">
+        <li>R</li><li>Python</li><li>LaTeX</li><li>SIG</li><li>Teledetección multiescala</li>
+        <li>Modelos de ecuaciones estructurales</li><li>Bases de datos de vegetación</li><li>Revisión sistemática y bibliometría</li>
+      </ul>
+
+      <h3>Idiomas</h3>
+      <ul class="chips">
+        <li>Español (nativo)</li><li>Inglés ([nivel])</li>
+      </ul>
+    </div>
+    <svg class="rip bottom-edge" data-seed="34" aria-hidden="true"></svg>
+  </div>
+  <div class="band" style="padding-bottom:20px"></div>
+</section>
+
+<!-- =========================================================
+     COLABORACIONES
+     ========================================================= -->
+<section class="page" id="colaboraciones" aria-labelledby="h-colab" hidden>
+  <div class="band page-head">
+    <div class="wrap">
+      <div>
+        <h2 id="h-colab" tabindex="-1">Con quién<br>trabajo</h2>
+        <p class="lead">Personas con las que he compartido proyectos, y en qué hemos trabajado juntos.</p>
+      </div>
+      <!-- Ilustración: plantas conectadas por raíces -->
+      <svg class="art" viewBox="0 0 380 200" role="img" aria-label="Plantas unidas por una red de raíces">
+        <path d="M10 70 H370" class="ink"/>
+        <g class="ink">
+          <path d="M50 70 V40"/><path d="M140 70 V30"/><path d="M230 70 V44"/><path d="M320 70 V34"/>
+        </g>
+        <use href="#leaf" width="54" height="28" transform="translate(50 46) rotate(-130) scale(.6) translate(-2 -14)"/>
+        <use href="#leaf" width="54" height="28" transform="translate(50 42) rotate(-50) scale(.6) translate(-2 -14)"/>
+        <use href="#leaf" width="54" height="28" transform="translate(140 36) rotate(-120) scale(.7) translate(-2 -14)"/>
+        <use href="#leaf" width="54" height="28" transform="translate(140 32) rotate(-60) scale(.7) translate(-2 -14)"/>
+        <use href="#leaf" width="54" height="28" transform="translate(230 48) rotate(-140) scale(.55) translate(-2 -14)"/>
+        <use href="#leaf" width="54" height="28" transform="translate(230 46) rotate(-40) scale(.55) translate(-2 -14)"/>
+        <use href="#leaf" width="54" height="28" transform="translate(320 40) rotate(-125) scale(.65) translate(-2 -14)"/>
+        <use href="#leaf" width="54" height="28" transform="translate(320 36) rotate(-55) scale(.65) translate(-2 -14)"/>
+        <g class="ink">
+          <path d="M50 70 C52 100 70 120 95 132 C120 120 135 100 140 70"/>
+          <path d="M140 70 C142 104 160 128 185 140 C210 126 226 100 230 70"/>
+          <path d="M230 70 C234 102 252 124 275 134 C300 120 316 100 320 70"/>
+          <path d="M95 132 C120 160 160 168 185 140 M185 140 C215 166 250 160 275 134"/>
+          <path d="M50 70 C44 110 30 140 20 170 M320 70 C330 110 350 140 362 168"/>
+          <path d="M95 132 l-10 26 M275 134 l14 24 M185 140 v34" class="thin"/>
+        </g>
+        <g class="dot">
+          <rect x="90" y="127" width="10" height="10"/><rect x="180" y="135" width="10" height="10"/><rect x="270" y="129" width="10" height="10"/>
+          <rect x="132" y="155" width="6" height="6"/><rect x="226" y="155" width="6" height="6"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="band" style="padding-top:0">
+    <div class="wrap">
+      <!-- Para añadir un proyecto, copia un bloque <article class="project"> completo -->
+      <article class="project">
+        <header>
+          <h3>Tesis doctoral</h3>
+          <p class="mute">Monitoreo escalable de la diversidad funcional de plantas en Chile central. Universidad Adolfo Ibáñez y Data Observatory Foundation.</p>
+        </header>
+        <ul class="people">
+          <!-- Para añadir una persona, copia un <li> -->
+          <li><span class="name">Javier Lopatin</span><span class="role">Director de tesis</span><span>Dirección de la tesis doctoral: teledetección y diversidad espectral.</span></li>
+          <li><span class="name">Dylan Craven</span><span class="role">Codirector de tesis</span><span>Codirección de la tesis doctoral: ecología funcional.</span></li>
+          <li><span class="name">Sebastián Moreno, Mauricio Galleguillos y Gonzalo Ruz</span><span class="role">Comité de tesis</span><span>Evaluación y seguimiento de la tesis.</span></li>
+        </ul>
+      </article>
+
+      <article class="project">
+        <header>
+          <h3>Biodiversidad y funcionamiento en sabanas</h3>
+          <p class="mute">CSIC, Madrid.</p>
+        </header>
+        <ul class="people">
+          <li><span class="name">Javier Pacheco-Labrador</span><span class="role">Responsable del proyecto</span><span>Simulación de relaciones biodiversidad–funcionamiento en sabanas con BOSSE.</span></li>
+        </ul>
+      </article>
+
+      <article class="project">
+        <header>
+          <h3>[Otro proyecto]</h3>
+          <p class="mute">[Institución, años]</p>
+        </header>
+        <ul class="people">
+          <li><span class="name">[Nombre]</span><span class="role">[Rol]</span><span>[En qué colaboramos]</span></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     BLOG
+     ========================================================= -->
+<section class="page" id="blog" aria-labelledby="h-blog" hidden>
+  <div class="band page-head">
+    <div class="wrap">
+      <div>
+        <h2 id="h-blog" tabindex="-1">Notas de<br>campo</h2>
+        <p class="lead">Opiniones, comentarios a artículos y recomendaciones sobre ecología, teledetección y la vida académica.</p>
+      </div>
+      <!-- Ilustración: lupa sobre una hoja -->
+      <svg class="art" viewBox="0 0 260 200" role="img" aria-label="Lupa sobre una hoja">
+        <use href="#leaf" width="54" height="28" transform="translate(20 120) rotate(-28) scale(3.4) translate(-2 -14)"/>
+        <circle cx="150" cy="78" r="50" class="ink fill-paper" style="fill-opacity:.55;stroke-width:2"/>
+        <path d="M186 114 L232 166" class="ink" style="stroke-width:7"/>
+        <path d="M126 70 l14 -10 M132 86 l16 -8 M146 98 l14 -6" class="ink thin"/>
+        <g class="dot"><rect x="140" y="64" width="9" height="9"/><rect x="162" y="80" width="6" height="6"/><rect x="214" y="42" width="8" height="8"/><rect x="232" y="24" width="5" height="5"/></g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="band" style="padding-top:0">
+    <div class="wrap">
+      <ul class="blog-filter" id="blog-filter">
+        <li><button type="button" data-f="all" aria-pressed="true">Todo</button></li>
+        <li><button type="button" data-f="opinion" aria-pressed="false">Opinión</button></li>
+        <li><button type="button" data-f="comentario" aria-pressed="false">Comentario</button></li>
+        <li><button type="button" data-f="recomendacion" aria-pressed="false">Recomendación</button></li>
+      </ul>
+
+      <div class="posts" id="posts">
+        <!--
+          PARA AÑADIR UNA ENTRADA: copia un bloque <details class="post"> completo
+          y pégalo ARRIBA del todo (la más reciente primero).
+          data-tag puede ser: opinion, comentario o recomendacion
+        -->
+        <details class="post" data-tag="opinion">
+          <summary>
+            <time datetime="2026-11-03">3 nov 2026</time>
+            <span class="ttl-wrap"><span class="ttl">Por qué abro este blog</span><br><span class="tag">Opinión</span></span>
+            <span class="plus" aria-hidden="true"></span>
+          </summary>
+          <div class="body">
+            <p>[Escribe aquí tu primera entrada. Por ejemplo: qué tipo de cosas vas a publicar, con qué frecuencia y para quién escribes.]</p>
+            <p>Los párrafos van entre etiquetas &lt;p&gt;. Para un subtítulo usa &lt;h4&gt;, y para un enlace &lt;a href="..."&gt;.</p>
+          </div>
+        </details>
+
+        <details class="post" data-tag="comentario">
+          <summary>
+            <time datetime="2026-10-20">20 oct 2026</time>
+            <span class="ttl-wrap"><span class="ttl">[Comentario sobre un artículo]</span><br><span class="tag">Comentario</span></span>
+            <span class="plus" aria-hidden="true"></span>
+          </summary>
+          <div class="body">
+            <p>[Referencia del artículo, con enlace al DOI.]</p>
+            <h4>Qué propone</h4>
+            <p>[Resumen breve en tus palabras.]</p>
+            <h4>Lo que me deja pensando</h4>
+            <p>[Tu lectura crítica.]</p>
+          </div>
+        </details>
+
+        <details class="post" data-tag="recomendacion">
+          <summary>
+            <time datetime="2026-10-05">5 oct 2026</time>
+            <span class="ttl-wrap"><span class="ttl">[Recomendación: libro, curso o herramienta]</span><br><span class="tag">Recomendación</span></span>
+            <span class="plus" aria-hidden="true"></span>
+          </summary>
+          <div class="body">
+            <h4>Qué es</h4>
+            <p>[Descripción breve.]</p>
+            <h4>Por qué lo recomiendo</h4>
+            <p>[Tu razón.]</p>
+            <h4>Para quién</h4>
+            <p>[A quién le servirá más.]</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     CONTRIBUCIONES
+     ========================================================= -->
+<section class="page" id="contribuciones" aria-labelledby="h-contrib" hidden>
+  <div class="band page-head">
+    <div class="wrap">
+      <div>
+        <h2 id="h-contrib" tabindex="-1">Contri&shy;buciones</h2>
+        <p class="lead">Todo lo que he producido: artículos, bases de datos, presentaciones en congresos, software y divulgación.</p>
+      </div>
+      <!-- Ilustración: firma espectral de la vegetación -->
+      <svg class="art" viewBox="0 0 360 210" role="img" aria-label="Curva de reflectancia espectral de la vegetación">
+        <path d="M24 186 H344 M24 186 V20" class="ink"/>
+        <path d="M24 186 m0 0 h6 M24 140 h6 M24 94 h6 M24 48 h6" class="ink thin"/>
+        <path d="M30 172 C50 170 62 168 72 160 C80 154 88 154 96 162 C106 172 116 176 124 172 C134 166 140 110 152 72 C160 52 176 50 200 50 C228 50 246 52 256 60 C262 66 266 80 272 84 C278 86 282 64 292 62 C302 62 306 92 314 118 C320 132 326 108 334 98 C338 94 342 96 344 100" class="ink" style="stroke-width:2"/>
+        <g class="dot">
+          <rect x="47" y="164" width="8" height="8"/><rect x="83" y="150" width="8" height="8"/><rect x="113" y="168" width="8" height="8"/>
+          <rect x="142" y="94" width="8" height="8"/><rect x="196" y="46" width="8" height="8"/><rect x="268" y="80" width="8" height="8"/><rect x="310" y="114" width="8" height="8"/>
+        </g>
+        <text x="330" y="204" font-family="IBM Plex Mono" font-size="11" class="mute" fill="currentColor">λ</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="band dark">
+    <svg class="rip top-edge" data-seed="55" aria-hidden="true"></svg>
+    <div class="wrap">
+      <ul class="filter" id="filter">
+        <li><button type="button" data-f="all" aria-pressed="true">Todo</button></li>
+        <li><button type="button" data-f="articulo" aria-pressed="false">Artículos</button></li>
+        <li><button type="button" data-f="datos" aria-pressed="false">Bases de datos</button></li>
+        <li><button type="button" data-f="conferencia" aria-pressed="false">Conferencias</button></li>
+        <li><button type="button" data-f="tesis" aria-pressed="false">Tesis</button></li>
+        <li><button type="button" data-f="software" aria-pressed="false">Software</button></li>
+        <li><button type="button" data-f="divulgacion" aria-pressed="false">Divulgación</button></li>
+      </ul>
+      <p class="counts mute" id="counts" aria-live="polite"></p>
+
+      <!--
+        PARA AÑADIR UNA CONTRIBUCIÓN: copia un <li> y cambia data-type.
+        Tipos: articulo, datos, conferencia, tesis, software, divulgacion
+        Para enlazar, envuelve el título así: <a class="t" href="https://doi.org/...">Título</a>
+      -->
+      <ul class="works" id="works">
+        <li data-type="articulo">
+          <span class="yr">2026</span>
+          <div><span class="t">Revisión sistemática y análisis bibliométrico de la relación entre diversidad espectral y diversidad funcional de plantas</span>
+            <span class="mute">Cerda J.M. et al. Science of Remote Sensing.</span><br><span class="status">Enviado</span></div>
+          <span class="type">Artículo</span>
+        </li>
+        <li data-type="articulo">
+          <span class="yr">2026</span>
+          <div><span class="t">Parcelas-CL: una base de datos estandarizada de parcelas de vegetación georreferenciadas para el centro-sur de Chile</span>
+            <span class="mute">Cerda J.M. et al. Landscape Ecology.</span><br><span class="status">En revisión</span></div>
+          <span class="type">Artículo</span>
+        </li>
+        <li data-type="datos">
+          <span class="yr">2026</span>
+          <div><span class="t">Parcelas-CL</span>
+            <span class="mute">Base de datos de parcelas de vegetación georreferenciadas y estandarizadas, centro-sur de Chile. [Enlace al repositorio]</span></div>
+          <span class="type">Base de datos</span>
+        </li>
+        <li data-type="articulo">
+          <span class="yr">2026</span>
+          <div><span class="t">Relaciones entre diversidad espectral y funcional a varias escalas a lo largo de un gradiente altitudinal en la cuenca del Mapocho</span>
+            <span class="mute">Cerda J.M. et al.</span><br><span class="status">En preparación</span></div>
+          <span class="type">Artículo</span>
+        </li>
+        <li data-type="tesis">
+          <span class="yr">2026</span>
+          <div><span class="t">Towards a Scalable Framework for Monitoring Plant Functional Diversity</span>
+            <span class="mute">Tesis doctoral, Universidad Adolfo Ibáñez. Defendida el 8 de septiembre de 2026.</span></div>
+          <span class="type">Tesis</span>
+        </li>
+        <li data-type="conferencia">
+          <span class="yr">[año]</span>
+          <div><span class="t">[Título de la presentación o póster]</span>
+            <span class="mute">[Congreso, ciudad]. [Oral / póster]</span></div>
+          <span class="type">Conferencia</span>
+        </li>
+      </ul>
+    </div>
+    <svg class="rip bottom-edge" data-seed="89" aria-hidden="true"></svg>
+  </div>
+  <div class="band" style="padding-bottom:20px"></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <p class="mute" style="margin-bottom:8px">Escríbeme</p>
+      <a class="big" href="mailto:tu.correo@ejemplo.com">tu.correo@ejemplo.com</a>
+    </div>
+    <p class="mute" style="font-size:12px;margin:0">Actualizado en noviembre de 2026</p>
+  </div>
+</footer>
+
+<script>
+/* ---------- pestañas ---------- */
+(function(){
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var links = Array.prototype.slice.call(document.querySelectorAll('#tabs a'));
+  var bar = document.getElementById('tab-bar');
+  var first = true;
+
+  function moveBar(a){
+    if(!a) return;
+    bar.style.width = a.offsetWidth - 28 + 'px';
+    bar.style.transform = 'translateX(' + (a.offsetLeft + 14) + 'px)';
+  }
+  function show(){
+    var id = (location.hash || '#inicio').slice(1);
+    if(!document.getElementById(id) || !document.getElementById(id).classList.contains('page')) id = 'inicio';
+    pages.forEach(function(p){ p.hidden = p.id !== id; });
+    var current;
+    links.forEach(function(a){
+      var on = a.getAttribute('href') === '#' + id;
+      if(on){ a.setAttribute('aria-current','page'); current = a; }
+      else a.removeAttribute('aria-current');
+    });
+    moveBar(current);
+    if(current && current.scrollIntoView && window.innerWidth < 900) current.scrollIntoView({block:'nearest', inline:'center'});
+    drawRips();
+    window.scrollTo(0,0);
+    requestAnimationFrame(function(){ window.scrollTo(0,0); });
+    if(!first){
+      var h = document.querySelector('#' + id + ' h1, #' + id + ' h2');
+      if(h) h.focus({preventScroll:true});
+    }
+    first = false;
+  }
+  window.addEventListener('hashchange', show);
+  window.addEventListener('resize', function(){ moveBar(document.querySelector('#tabs a[aria-current]')); });
+  window.addEventListener('scroll', function(){
+    document.getElementById('top').classList.toggle('scrolled', window.scrollY > 8);
+  }, {passive:true});
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ moveBar(document.querySelector('#tabs a[aria-current]')); });
+  show();
+})();
+
+/* ---------- bordes de papel rasgado ---------- */
+function drawRips(){
+  var night = getComputedStyle(document.documentElement).getPropertyValue('--night').trim();
+  var sheet = getComputedStyle(document.documentElement).getPropertyValue('--sheet').trim();
+  document.querySelectorAll('.rip').forEach(function(svg){
+    if(svg.dataset.done) return;
+    var seed = +svg.dataset.seed || 1;
+    function rnd(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }
+    var W = 1200, H = 46, x = 0, pts = [], fringe = [];
+    var ph1 = rnd()*6, ph2 = rnd()*6;
+    while(x <= W){
+      var base = 26 + Math.sin(x/170 + ph1)*7 + Math.sin(x/53 + ph2)*3;
+      var y = base + (rnd()-.5)*5;
+      pts.push([x, y]);
+      fringe.push([x, y - 2 - rnd()*5]);
+      x += 3 + rnd()*9;
+    }
+    pts.push([W, pts[pts.length-1][1]]); fringe.push([W, fringe[fringe.length-1][1]]);
+    function d(arr){ return 'M0 ' + H + ' L' + arr.map(function(p){ return p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join(' L') + ' L' + W + ' ' + H + ' Z'; }
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    svg.setAttribute('preserveAspectRatio', 'none');
+    svg.innerHTML = '<path d="' + d(fringe) + '" fill="' + sheet + '"/><path d="' + d(pts) + '" fill="' + night + '"/>';
+    svg.dataset.done = 1;
+  });
+}
+
+/* ---------- filtros ---------- */
+function setupFilter(listId, itemsSel, attr, countEl){
+  var btns = document.querySelectorAll('#' + listId + ' button');
+  var items = document.querySelectorAll(itemsSel);
+  function apply(f){
+    var n = 0;
+    items.forEach(function(it){ var on = f === 'all' || it.getAttribute(attr) === f; it.hidden = !on; if(on) n++; });
+    btns.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.f === f ? 'true' : 'false'); });
+    if(countEl) countEl.textContent = n + (n === 1 ? ' entrada' : ' entradas');
+  }
+  btns.forEach(function(b){ b.addEventListener('click', function(){ apply(b.dataset.f); }); });
+  apply('all');
+}
+setupFilter('filter', '#works > li', 'data-type', document.getElementById('counts'));
+setupFilter('blog-filter', '#posts > .post', 'data-tag', null);
+</script>
+</body>
+</html>
