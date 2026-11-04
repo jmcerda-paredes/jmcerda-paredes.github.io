@@ -16,5 +16,11 @@
     "title": "[Recomendación: libro, curso o herramienta]",
     "date": "2026-10-05",
     "tag": "recomendacion"
+  },
+    {
+    "file": "test.md",
+    "title": "[PRUEBA]",
+    "date": "2026-10-05",
+    "tag": "opinion"
   }
 ]
