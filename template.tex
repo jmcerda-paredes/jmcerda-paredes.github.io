@@ -1,0 +1,297 @@
+%% start of file `template.tex'.
+%% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2022 moderncv maintainers (github.com/moderncv).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+\documentclass[11pt,a4paper,sans]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+
+\moderncvcolor{blue}                               % color options 'black', 'blue' (default), 'burgundy', 'green', 'grey', 'orange', 'purple' and 'red'
+% moderncv themes
+\moderncvstyle{classic}                             % style options are 'casual' (default), 'classic', 'banking', 'oldstyle' and 'fancy'
+%\renewcommand{\familydefault}{\sfdefault}         % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
+%\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
+% \setlength{\quotewidth}{0.85\textwidth}
+% \setlength{\makecvtitlenamewidth}{12cm}
+
+% \makeatletter
+% \renewcommand*{\makecvtitle}{%
+%   \recomputecvlengths%
+%   \maketitle%
+%   \vspace{-1.5em} % <-- THIS is the key spacing
+% }
+% \makeatother
+
+% adjust the page margins
+\usepackage[scale=0.85]{geometry}
+\setlength{\footskip}{136.00005pt}                 % depending on the amount of information in the footer, you need to change this value. comment this line out and set it to the size given in the warning
+%\setlength{\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
+\setlength{\makecvheadnamewidth}{12cm}            % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
+\usepackage{enumitem}
+% font loading
+% for luatex and xetex, do not use inputenc and fontenc
+% see https://tex.stackexchange.com/a/496643
+\ifxetexorluatex
+  \usepackage{fontspec}
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX}
+  \setmainfont{Latin Modern Roman}
+  \setsansfont{Latin Modern Sans}
+  \setmonofont{Latin Modern Mono}
+  \setmathfont{Latin Modern Math} 
+\else
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\fi
+
+% document language
+\usepackage[english]{babel}  % FIXME: using spanish breaks moderncv
+\usepackage{etoolbox}
+\patchcmd{\makecvtitle}{}{}{}{}
+\renewcommand*{\namefont}{\Huge\mdseries\upshape}
+
+% personal data
+\name{José M.}{Cerda-Paredes, PhD}
+%\title{}                               % optional, remove / comment the line if not wanted
+%\born{4 July 1776}                                 % optional, remove / comment the line if not wanted
+%\address{street and number}{postcode city}{country}% optional, remove / comment the line if not wanted; the "postcode city" and "country" arguments can be omitted or provided empty
+\phone[mobile]{+56~(9)~7764~6141}                   % optional, remove / comment the line if not wanted; the optional "type" of the phone can be "mobile" (default), "fixed" or "fax"
+%\phone[fixed]{+2~(345)~678~901}
+%\phone[fax]{+3~(456)~789~012}
+\email{jose.cerda@dataobservatory.net}                               % optional, remove / comment the line if not wanted
+%\homepage{www.johndoe.com}                         % optional, remove / comment the line if not wanted
+
+% Social icons
+%\social[linkedin]{john.doe}                        % optional, remove / comment the line if not wanted
+%\social[xing]{john\_doe}                           % optional, remove / comment the line if not wanted
+%\social[twitter]{ji\_doe}                             % optional, remove / comment the line if not wanted
+%\social[github]{jdoe}                              % optional, remove / comment the line if not wanted
+%\social[gitlab]{jdoe}                              % optional, remove / comment the line if not wanted
+% \social[stackoverflow]{0000000/johndoe}            % optional, remove / comment the line if not wanted
+% \social[bitbucket]{jdoe}                           % optional, remove / comment the line if not wanted
+% \social[skype]{jdoe}                               % optional, remove / comment the line if not wanted
+\social[orcid]{0000-0002-0087-5494}                  % optional, remove / comment the line if not wanted
+%\social[researchgate]{Jose Cerda Paredes}                        % optional, remove / comment the line if not wanted
+\extrainfo{
+  \faResearchgate\ 
+  \href{https://www.researchgate.net/profile/Jose-Cerda-Paredes-2}{José Miguel Cerda-Paredes}
+}
+% \social[researcherid]{jdoe}                        % optional, remove / comment the line if not wanted
+% \social[telegram]{jdoe}                            % optional, remove / comment the line if not wanted
+% \social[whatsapp]{12345678901}                     % optional, remove / comment the line if not wanted
+% \social[signal]{12345678901}                       % optional, remove / comment the line if not wanted
+% \social[matrix]{@johndoe:matrix.org}               % optional, remove / comment the line if not wanted
+%\social[googlescholar]{U6CL5OYAAAAJ}            % optional, remove / comment the line if not wanted
+
+
+%\extrainfo{additional information}                 % optional, remove / comment the line if not wanted
+%\photo[64pt][0.4pt]{foto}                       % optional, remove / comment the line if not wanted; '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file
+
+\quote{Soy ecólogo y trabajo en la intersección entre biodiversidad, ecología y ciencia de datos, utilizando rasgos funcionales y modelos espaciales para estudiar los ecosistemas en transformación.}    
+
+% optional, remove / comment the line if not wanted
+
+% bibliography adjustments (only useful if you make citations in your resume, or print a list of publications using BibTeX)
+%   to show numerical labels in the bibliography (default is to show no labels)
+%\makeatletter\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}\makeatother
+\renewcommand*{\bibliographyitemlabel}{[\arabic{enumiv}]}
+%   to redefine the bibliography heading string ("Publications")
+%\renewcommand{\refname}{Articles}
+
+% bibliography with mutiple entries
+%\usepackage{multibib}
+%\newcites{book,misc}{{Books},{Others}}
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+\begin{document}
+%\begin{CJK*}{UTF8}{gbsn}                          % to typeset your resume in Chinese using CJK
+%-----       resume       ---------------------------------------------------------
+\makecvtitle
+
+% \hspace{0.5cm} Mi formación profesional comenzó en el ámbito de la biología marina, donde participé en diversos proyectos enfocados en ecología marina. Sin embargo, a partir de mis estudios de magíster y, posteriormente, durante mi doctorado, orienté mi investigación hacia el estudio de la vegetación y los ecosistemas terrestres. Actualmente, mi trabajo se sitúa en la intersección entre biodiversidad, ecología y ciencia de datos, integrando rasgos funcionales, análisis espaciales y modelamiento para comprender la dinámica de ecosistemas en transformación. 
+
+% \bigskip
+% \hspace{0.5cm}Mi interés por el modelamiento ecológico y la ciencia de datos surgió durante mi formación de posgrado, particularmente tras cursar un diplomado en Big Data y Machine Learning con énfasis en programación en Python. Esta experiencia me permitió incorporar herramientas computacionales avanzadas al estudio de sistemas ecológicos complejos y consolidó una línea de trabajo orientada a la integración de datos ecológicos, análisis espacial y modelamiento predictivo. 
+
+% \bigskip
+% \hspace{0.5cm}Cuento con amplia experiencia en trabajo de campo y en la aplicación de diversas metodologías para el estudio de la biodiversidad. Mi investigación doctoral se ha centrado en la diversidad funcional de plantas desde una perspectiva que integra aproximaciones de ecología de campo y percepción remota. En este contexto, desarrollé una revisión sistemática que permitió identificar similitudes y diferencias conceptuales entre ambas disciplinas en el estudio de la diversidad funcional vegetal (preprint). 
+
+% \bigskip
+% \hspace{0.5cm}Asimismo, se encuentra en preparación un manuscrito en el que evalúo los efectos del gradiente altitudinal sobre la relación entre diversidad funcional y diversidad espectral a múltiples escalas espaciales, utilizando imágenes satelitales de alta resolución (e.g., WorldView-2 y Sentinel-2) en cuencas hidrográficas de ecosistemas semiáridos del Mediterráneo chileno. Con el objetivo de escalar análisis locales a nivel nacional, lideré una iniciativa para recopilar, armonizar e integrar más de 1.400 parcelas de monitoreo de vegetación distribuidas a lo largo de Chile. Esta primera versión de la base de datos \textit{Parcelas-CL} será publicada próximamente y constituye un aporte para el estudio de los patrones de biodiversidad vegetal en el país. 
+
+% \bigskip
+% \hspace{0.5cm}El desarrollo de mis estudios y mi tesis doctoral me ha permitido adquirir experiencia en diversidad funcional, gestión y armonización de bases de datos de biodiversidad, análisis espacial, procesamiento de imágenes satelitales e implementación de modelos de aprendizaje automático.
+
+
+\section{Educación}
+\cventry{2022--2024}{PhD en Data Science}{Universidad Adolfo Ibáñez}{Santiago}{\textit{}}{Facultad de Ingeniería y Ciencias\newline{}
+Supervisores: Dr. Javier Lopatin \& Dr. Dylan Craven}  % arguments 3 to 6 can be left empty
+\cventry{2022}{Dip. en Big Data y Machine Learning}{Pontificia Universidad Católica de Chile}{Santiago}{\textit{}}{Facultad de Ingeniería}
+\cventry{2020--2022}{MSc en Recursos Naturales}{Pontificia Universidad Católica de Chile}{Santiago}{\textit{}}{Facultad de Agronomía y Sistemas Naturales\newline{}
+Supervisores: Dr. Rosanna Ginocchio \& Dr. José Miguel Fariña}
+
+\cventry{2013--2018}{Lic. en Ciencias Biológicas}{Pontificia Universidad Católica de Chile}{Santiago}{\textit{}}{Facultad de Ciencias Biológicas}
+
+\section{Becas}
+\cventry{2022--2024}{Agencia Nacional de Investigación y Desarrollo (ANID Chile)}{Data Observatory}{Santiago}{Chile}{{Tesista de Doctorado}\\
+\textit{Plant functional diversity: Insights at different scales from field ecology and remote sensing.}}
+\cventry{2017}{Pontificia Universidad Católica de Chile}{}{Santiago}{Chile}{\textit{Beca de Pregrado de Investigación de Verano} en el Laboratoria de Ictiología (Dr. Patricio Ojeda)}
+
+%\newpage
+\section{Experiencia}
+\cventry{2026--Presente}{Investigador Postdoctoral}{\href{https://speclab.csic.es/}{SpecLab} del Consejo Superior de Investigaciones Científicas}{Madrid}{España}{\textit{Proyecto: "Sistemas Integrados de Observación y Experimentos de Simulación para Analizar las Relaciones Biodiversidad-Función en Ecosistemas de Sabana"}\
+% Proyecto de monitoreo de impactos ambientales a una de las empresas forestales y de celulosa más grandes de América Latina.
+\begin{itemize}
+    \item Análisis de las relaciones Biodiversidad-Función en Ecosistemas 
+    \item Complementar los "Sistemas Integrados de Observación y Experimentos de Simulación" (BOSSE)  
+    \item Desarrollo de módulo en el paquete pyBOSSE para simular interacciones planta-planta\\
+\end{itemize}
+}
+\cventry{2018--Presente}{Analista Biológico}{}{Santiago}{Chile}{\textit{Programas de Monitoreo Marino “PROMNA” y “MAPA”, en la sección Biota Intermareal, Celulosa Arauco.}\
+% Proyecto de monitoreo de impactos ambientales a una de las empresas forestales y de celulosa más grandes de América Latina.
+\begin{itemize}
+    \item Gestión y ejecución de trabajo de campo; colecta de comunidades de invertebrados de playas de arena región del Ñuble y Bíobío, Chile. 
+    \item Liderazgo de equipo de trabajo de 6 personas
+    \item Análisis de muestra (e.g., identificación taxonómica, medición de tamaños corporales, estimación de métricas poblaciones)
+    \item Análisis estadísticos y elaboración de informes\\
+\end{itemize}
+}
+
+\cventry{2022--2026}{Asistente de Investigación}{Universidad Adolfo Ibáñez}{Santiago}{Chile}{\textit{Gestión y ejecución levantamiento de datos proyectos: 1) "Efecto de la vegetación en la retroalimentación tierra-atmósfera en la zona mediterránea de Chile" [FONDECYT SA77210031], y 2) "Upscaling Ecosystem Resilience to Climate Change in a Mediterranean ecosystem of Chile using Remote Sensing" [FONDECYT 11241088].}\
+% Proyecto financiado por el Fondo Nacional de Desarrollo Científico y Tecnológico chileno y la Agencia Nacional de Investigación y Desarrollo de Chile.
+\begin{itemize}
+    \item Gestión y ejecución de trabajo de campo; monitoreno de parcelas de vegetación en ecosistemas mediterráneos y toma de muestras de plantas
+    \item Liderazgo de equipo de trabajo de 4 personas
+    \item Análisis de muestras; medición de rasgos funcionales\\
+\end{itemize}}
+
+\cventry{2022--2023}{Encargado Ecosistemas Marinos}{Centro de Información Territorial-UAI}{Santiago}{Chile}{\textit{Servicio Especializado en Biodiversidad, Licitación GCP-1001-07-OST-0138 (AMSA). Evaluación de Servicios Ecosistémicos Marinos.}\
+% Asesoría a una de las empresas mineras más importantes de Chile, Antofagasta Minerals, para explorar el potencial de las costas de la región de Coquimbo.
+\begin{itemize}
+    \item Gestión y ejecución de trabajo de campo
+    \item Identificación y estimación visual de servicios ecosistémicos costeros de regiones zona centro de Chile\\
+\end{itemize}
+}
+\cventry{2018--2022}{Encargado de Laboratorio}{Pontificia Universidad Católica de Chile}{Santiago}{Chile}{\textit{Laboratorio de Ecología Comunitaria y Ecosistémica de la Interfase Mar-Tierra. Departamento de Ecología, Facultad de Cs. Biológicas.}
+\begin{itemize}
+    \item Administración de laboratorio
+    \item Desarrollo de trabajo de campo
+    \item Apoyo en desarrollo de tesis de pre- y postgrado
+    \item Procesamiento de muestras colectadas (e.g., rasgos funcionales de plantas, isótopos estables de suelo y plantas)\\
+\end{itemize}
+}
+
+\cventry{2019}{Asistente de Campo}{Pontificia Universidad Católica de Chile}{Santiago}{Chile}{\textit{Apoyo en trabajo de campo, proyecto: "Espectros de tamaño de las comunidades de invertebrados de los humedales costeros en Chile: el papel de las perturbaciones" [FONDECYT 11180668].}\
+% Proyecto financiado por el Fondo Nacional de Desarrollo Científico y Tecnológico chileno y la Agencia Nacional de Investigación y Desarrollo de Chile.
+\begin{itemize}
+    \item Gestión y ejecución de trabajo de campo; postura de trampas \textit{pitfall}, medición salinidad de agua, colecta de macroinvertebrados limnológicos
+    \item Procesamiento de muestras colectadas; identificación taxonómica de invertebrados, conteo de abundancia y medición por medio de lupa)\\
+\end{itemize}
+}
+
+%\newpage
+
+% \section{Habilidades \& Capacidades Técnicas}
+% 
+% \begin{itemize}[leftmargin=3cm]
+%   \item Lenguajes de programación: Python avanzado, R avanzado, \LaTeX intermedio.
+%   \item Herramientas de Sistemas de Información Geográfica (e.g., QGIS).
+%   \item Análisis estadístico y modelamiento ecológico.
+%   \item Manejo de bases de datos (e.g., SQL).
+%   \item Control de versiones: Git y gestión de repositorios remotos en GitHub
+%   \item Diseño, gestión y ejecución de trabajo de campo.
+%   \item Comunicación científica y experiencia en presentaciones académicas.
+%   \item Trabajo colaborativo y buenas relaciones interpersonales.
+% \end{itemize}
+% 
+% \section{Idiomas}
+% \begin{itemize}[leftmargin=3cm]
+%   \item Español (Lengua nativa)
+%   \item Inglés avanzado (Conversación, lectura y escritura)
+% \end{itemize}
+
+
+\renewcommand{\refname}{Publicaciones}
+\nocite{*}
+\bibliographystyle{unsrt}
+\bibliography{publications}                        % 'publications' is the name of a BibTeX file
+
+% Publications from a BibTeX file using the multibib package
+%\section{Publications}
+%\nocitebook{book1,book2}
+%\bibliographystylebook{plain}
+%\bibliographybook{publications}                   % 'publications' is the name of a BibTeX file
+%\nocitemisc{misc1,misc2,misc3}
+%\bibliographystylemisc{plain}
+%\bibliographymisc{publications}                   % 'publications' is the name of a BibTeX file
+%\newpage
+%\clearpage
+\section{Docencia} %\newline{}
+\cventry{}{\textbf{Pontificia Universidad Católica de Chile}}{}{Santiago}{Chile}{Estadística (Profesor encargado, pregrado) -- (2025--206) 
+\newline{}Fundamentos de Ecología y Evolución (Profesor co-encargado, pregrado) -- (2024--2026) 
+\newline{}Fundamentos de Ecología y Evolución (Ayudante Instructor, pregrado) -- (2016--2024)
+\newline{}Principios Ecológicos y Medio Ambiente (Ayudante Instructor, pregrado) -- (2016--2025)
+\newline{}Restauración Ecológica (Ayudante Instructor, pregrado) -- (2022)
+\newline{}Trabajo Experimental en Ecología (Ayudante Instructor, pregrado) -- (2020)
+\newline{}Vertebrados Marinos (Ayudante Instructor, pregrado) -- (2016--2018)}  
+
+\cventry{}{\textbf{Universidad Adolfo Ibáñez}}{}{Santiago}{Chile}{Taller en Investigación y Desarrollo (Ayudante Instructor, postgrado) -- (2023)\newline{}Bioestadística (Ayudante Instructor, postgrado) -- (2022--2023)} 
+
+\section{Supervisión} %\newline{}
+%\subsection{}
+\cventry{}{Pregrado}{}{}{}{Camila Henríquez, Universidad de Las Américas (Marzo 2026).\\
+\textit{Análisis bibliométrico del uso de ciencia de datos en el diagnóstico y tratamiento de enfermedades equinas} 
+}
+\section{Conferencias} %\newline{}
+%\subsection{}
+\cventry{2026}{EGU26 General Assembly}{Vienna}{Austria}{}{Bridging the gaps between field-based ecology and remote sensing to estimate plant functional diversity: a systematic review (Virtual presentation).\\
+\textbf{Cerda-Paredes J.M.}, Craven D., Lopatin J.} 
+\cventry{2025}{International Symposium on Climate and Resilience (CR2)}{Viña del Mar}{Chile}{}{Functional diversity of plants in semi-arid ecosystems: Influence of topographic complexity and elevation in the Mediterranean Andes of Chile (Poster) {\href{https://simposio.cr2.cl/wp-content/uploads/2026/01/LibroResumenes2025.pdf}{Book of Abstracts (pp. 83)}}.\\
+\textbf{Cerda-Paredes J.M.}, Pérez-Giraldo L.C., Kimura A., Craven D., Lopatin J.} 
+\cventry{2025}{1 Reunión Trinacional de Ecología}{Mendoza}{Argentina}{}{Collaborative assessment of the distribution and diversity of sclerophyllous forests (Poster) {\href{https://ianigla.net/rae2025/libro/archivos/459.pdf}{Book of Abstracts}}.\\
+\textbf{Cerda-Paredes J.M.}, Altamirano A., Becerra P.I., Dobbs C.,
+Galleguillos M., Miranda A., Miranda M.D., Morales N.S., Ovalle J.F., Venegas-González A., Zamorano-Elgueta C., Craven D., Lopatin J.}
+\cventry{2025}{V Reunión Bienal de la Sociedad de Ecología del Paisaje de Chile (IALE-Chile)}{Santiago}{Chile}{}{Esclerófilo-CL: a database of sampling plots in the sclerophyllous forest in Chile (Oral) {\href{https://70faab0d-6316-467d-9b59-c09827bd5141.filesusr.com/ugd/9fc14c_e2e62ad729be4911beee7b1c8f755296.pdf?index=true}{Book of Abstracts (pp. 56)}}.\\
+\textbf{Cerda-Paredes J.M.}, Altamirano A., Becerra P.I., Dobbs C.,
+Galleguillos M., Miranda A., Miranda M.D., Morales N.S., Ovalle J.F., Venegas-González A., Zamorano-Elgueta C., Craven D., Lopatin J.} 
+\cventry{2025}{BIOSPACE25}{Frascati}{Italy}{}{A comparative analysis of field-based ecology and remote sensing approaches to plant functional diversity (Oral) {\href{https://biospace25.esa.int/iframe-agenda/files/ID326_Cerda-Paredes.pdf}{Presentation}}.\\
+\textbf{Cerda-Paredes J.M.}, Pacheco-Labrador J., Craven D., Lopatin J.} 
+\cventry{2023}{I Congreso Data Science - Data Observatory}{Santiago}{Chile}{}{Occurrence of dry spells in central Chile: historical record and projections in light of climate change (Poster).\\
+\textbf{Cerda-Paredes J.M.}, Berroeta D., Vega V., Cristian Martinez-Villalobos C.} 
+\cventry{2023}{International Symposium on Climate and Resilience (CR2)}{Viña del Mar}{Chile}{}{Plant trait diversity: Bibliometric analysis of the gap between classical ecology and remote sensing (Poster) {\href{https://www.cr2.cl/wp-content/uploads/2023/08/resumenes_Sicyr.pdf}{Book of Abstracts (pp. 419)}}.\\
+\textbf{Cerda-Paredes J.M.}, Pérez-Giraldo L.C., Craven D., Lopatin J.} 
+\cventry{2022}{LXV REUNIÓN ANUAL SOCIEDAD DE BIOLOGÍA DE CHILE}{Pucón}{Chile}{}{Coexistence of \textit{Ambrosia chamissonis} and \textit{Ammophila arenaria} in coastal dunes in the Ñuble Region, Chile (Poster) {\href{https://www.biologiachile.cl/wp-content/uploads/2023/01/Libro-de-resumenes-SocBio-2022-v5.pdf}{Book of Abstracts (pp. 69)}}.\\
+\textbf{Cerda-Paredes J.M.}, Ginocchio R., Fariña J.M.} 
+\cventry{2018}{XXXVIII Congreso de Ciencias del Mar}{Valdivia}{Chile}{}{Connectivity of \textit{Girella laevifrons} populations along the Chilean coast (Poster) {\href{https://schcm.cl/images/biblioteca/038.pdf}{Book of Abstracts (pp. 546)}}.\\
+\textbf{Cerda-Paredes J.M.}, López F., Ojeda F.P.} 
+
+%-----       letter       ---------------------------------------------------------
+% recipient data
+% \recipient{Company Recruitment team}{Company, Inc.\\123 somestreet\\some city}
+% \date{January 01, 1984}
+% \opening{Dear Sir or Madam,}
+% \closing{Yours faithfully,}
+% \enclosure[Attached]{curriculum vit\ae{}}          % use an optional argument to use a string other than "Enclosure", or redefine \enclname
+% \makelettertitle
+
+% Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper neque sit amet lectus facilisis sed luctus nisl iaculis. Vivamus at neque arcu, sed tempor quam. Curabitur pharetra tincidunt tincidunt. Morbi volutpat feugiat mauris, quis tempor neque vehicula volutpat. Duis tristique justo vel massa fermentum accumsan. Mauris ante elit, feugiat vestibulum tempor eget, eleifend ac ipsum. Donec scelerisque lobortis ipsum eu vestibulum. Pellentesque vel massa at felis accumsan rhoncus.
+
+% Suspendisse commodo, massa eu congue tincidunt, elit mauris pellentesque orci, cursus tempor odio nisl euismod augue. Aliquam adipiscing nibh ut odio sodales et pulvinar tortor laoreet. Mauris a accumsan ligula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse vulputate sem vehicula ipsum varius nec tempus dui dapibus. Phasellus et est urna, ut auctor erat. Sed tincidunt odio id odio aliquam mattis. Donec sapien nulla, feugiat eget adipiscing sit amet, lacinia ut dolor. Phasellus tincidunt, leo a fringilla consectetur, felis diam aliquam urna, vitae aliquet lectus orci nec velit. Vivamus dapibus varius blandit.
+
+% Duis sit amet magna ante, at sodales diam. Aenean consectetur porta risus et sagittis. Ut interdum, enim varius pellentesque tincidunt, magna libero sodales tortor, ut fermentum nunc metus a ante. Vivamus odio leo, tincidunt eu luctus ut, sollicitudin sit amet metus. Nunc sed orci lectus. Ut sodales magna sed velit volutpat sit amet pulvinar diam venenatis.
+
+% Albert Einstein discovered that $e=mc^2$ in 1905.
+
+% \[ e=\lim_{n \to \infty} \left(1+\frac{1}{n}\right)^n \]
+
+% \makeletterclosing
+
+% %\clearpage\end{CJK*}                              % if you are typesetting your resume in Chinese using CJK; the \clearpage is required for fancyhdr to work correctly with CJK, though it kills the page numbering by making \lastpage undefined
+ \end{document}
+
+
+% %% end of file `template.tex'.
+

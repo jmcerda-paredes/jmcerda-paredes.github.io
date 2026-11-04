@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>José Miguel Cerda</title>
+<title>José Miguel Cerda-Paredes</title>
 <meta name="description" content="Ecología funcional de plantas, teledetección y ciencia de datos.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +18,7 @@
   --ink:#000000;       /* tinta */
   --night:#1D1D1D;     /* fondo de las bandas oscuras */
   --mute:#6B6A66;      /* texto secundario */
-  --accent:#FF1F8E;    /* acento (rosa). Prueba #FF5A1F para naranja */
+  --accent:#2673C0;    /* acento (rosa). Prueba #FF5A1F para naranja */
   --display:"Archivo", "Helvetica Neue", Arial, sans-serif;
   --body:"IBM Plex Mono", ui-monospace, Menlo, monospace;
   --script:"Yellowtail", cursive;
@@ -83,7 +83,7 @@ p{margin:0 0 1em;max-width:62ch}
 .hero{padding:clamp(32px,5vw,64px) 0 clamp(80px,9vw,120px)}
 .hero .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:40px;align-items:center}
 .hero h1{
-  font-size:clamp(3.2rem,8.6vw,7.4rem);line-height:.86;
+  font-size:clamp(1.8rem,5.5vw,3rem);line-height:.86;
   font-variation-settings:"wdth" 125;letter-spacing:-.02em;
 }
 .hero .field{
@@ -218,12 +218,66 @@ footer .big:hover{color:var(--accent)}
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
 }
+/* ---------- foto con borde rasgado ---------- */
+.torn-photo{justify-self:end;width:100%;max-width:460px;background:var(--sheet)}
+.torn-photo img{width:100%;height:auto;display:block}
+@media (max-width:900px){.torn-photo{justify-self:center;max-width:420px}}
+
+/* ---------- CV: listas de tareas y autores ---------- */
+.entries > li > div > span{display:block}
+.entries a{color:var(--sheet);text-decoration-color:var(--accent);text-underline-offset:3px}
+.entries a:hover{color:var(--accent)}
+.entries .tasks{margin:10px 0 0;padding-left:18px;color:#A9A8A3}
+.entries .tasks li{display:list-item;padding:3px 0;border:0}
+.entries .tasks li::marker{color:var(--accent)}
+.entries .authors{margin-top:6px;font-size:13px;color:#A9A8A3}
+.entries .authors b{color:var(--sheet);font-weight:500}
+
+/* ---------- nombres de personas enlazados ---------- */
+a.person{color:inherit;text-decoration:underline dotted;text-decoration-color:var(--accent);text-decoration-thickness:1.5px;text-underline-offset:3px}
+a.person:hover{color:var(--accent);text-decoration-style:solid}
+
+/* ---------- contribuciones: autores, revista y enlaces ---------- */
+.works a.t{color:var(--sheet);text-decoration:none}
+.works a.t:hover{color:var(--accent)}
+.works .authors{display:block;font-size:13px;color:#A9A8A3;line-height:1.55;margin-bottom:2px}
+.works .authors b{color:var(--sheet);font-weight:500}
+.works .venue{display:block;font-size:13px;color:#A9A8A3}
+.works .venue a{color:var(--sheet);text-decoration-color:var(--accent);text-underline-offset:3px}
+.works .venue a:hover{color:var(--accent)}
+
+/* ---------- colaboraciones por etapas ---------- */
+.stages{list-style:none;margin:0;padding:0}
+.stage{display:grid;grid-template-columns:260px 1fr;gap:56px;padding:40px 0;border-top:2px solid var(--ink)}
+.stage:last-child{border-bottom:2px solid var(--ink)}
+.stage-head .yr{display:block;font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 120;color:var(--accent);margin-bottom:6px}
+.stage-head h3{font-size:clamp(1.6rem,3vw,2.2rem);font-variation-settings:"wdth" 125;font-weight:800;line-height:1}
+.stamp{
+  display:inline-block;margin-top:22px;padding:6px 12px;border:2px solid var(--accent);color:var(--accent);
+  font-family:var(--display);font-weight:700;font-variation-settings:"wdth" 110;font-size:13px;
+  transform:rotate(-4deg);transform-origin:left center;
+}
+.collab{list-style:none;margin:0;padding:0}
+.collab li{display:grid;grid-template-columns:240px 1fr;gap:32px;padding:14px 0;border-top:1px solid rgba(0,0,0,.15);align-items:baseline}
+.collab li:first-child{border-top:0;padding-top:4px}
+.collab .name{font-family:var(--display);font-weight:800;font-size:1.2rem;font-variation-settings:"wdth" 112;line-height:1.15}
+@media (max-width:900px){
+  .stage{grid-template-columns:1fr;gap:20px}
+  .collab li{grid-template-columns:1fr;gap:4px}
+}
+
+/* ---------- blog: títulos y elementos dentro de cada entrada ---------- */
+.post .body h2,.post .body h3{font-family:var(--display);font-weight:700;font-variation-settings:"wdth" 108;font-size:15px;line-height:1.3;letter-spacing:0;margin:1.4em 0 .4em}
+.post .body ul,.post .body ol{padding-left:20px;max-width:62ch}
+.post .body blockquote{margin:1em 0;padding-left:16px;border-left:3px solid var(--accent);color:var(--mute)}
+.post .body img{max-width:100%;height:auto;margin:1em 0}
+.post .body a:not(.person){text-decoration-color:var(--accent);text-underline-offset:3px}
 </style>
 </head>
 <body>
 
 <!-- Símbolo de hoja reutilizado en las ilustraciones -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<!--<svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <symbol id="leaf" viewBox="-2 -14 54 28" overflow="visible">
       <path d="M0 0 C10 -11 34 -12 48 0 C34 12 10 11 0 0Z" class="fill-paper" />
@@ -231,17 +285,18 @@ footer .big:hover{color:var(--accent)}
     </symbol>
   </defs>
 </svg>
+-->
 
 <header class="top" id="top">
   <div class="wrap">
-    <a class="logo" href="#inicio">jm cerda</a>
+    <!--<a class="logo" href="#inicio">Cerda-Paredes, JM </a>-->
     <nav aria-label="Secciones">
       <ul class="tabs" id="tabs">
-        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#inicio">Yo</a></li>
         <li><a href="#cv">CV</a></li>
         <li><a href="#colaboraciones">Colaboraciones</a></li>
-        <li><a href="#blog">Blog</a></li>
         <li><a href="#contribuciones">Contribuciones</a></li>
+        <li><a href="#blog">Blog</a></li>
         <li aria-hidden="true" class="tab-bar" id="tab-bar"></li>
       </ul>
     </nav>
@@ -257,97 +312,31 @@ footer .big:hover{color:var(--accent)}
   <div class="hero">
     <div class="wrap">
       <div>
-        <h1 id="h-inicio" tabindex="-1">José<br>Miguel<br>Cerda</h1>
-        <p class="field">Ecología funcional de plantas,<br>teledetección y ciencia de datos</p>
-        <p class="lead">Estudio cómo medir la diversidad funcional de las plantas desde la parcela de campo hasta el píxel de satélite, con foco en los ecosistemas mediterráneos de Chile central. Hoy trabajo en el CSIC, en Madrid.</p>
+        <h1 id="h-inicio" tabindex="-1">José Miguel<br>Cerda-Paredes, PhD</h1>
+        <p class="field">Ecología Funcional de Plantas,<br>Remote Sensing & Ciencia de Datos</p>
+        <p class="lead">Soy ecólogo y me interesa comprender cómo se pueden utilizar los datos para apoyar la conservación y la toma de decisiones. 
+          Mi trabajo combina la teoría ecológica con herramientas cuantitativas, centrándose en la ecología funcional, la modelación, el análisis espacial y la ciencia de datos. 
+          Creo firmemente en la ciencia abierta y colaborativa, y me gusta contribuir a proyectos que integran datos sobre biodiversidad para permitir la investigación a 
+          escalas espaciales y temporales más amplias.</p>
         <ul class="social">
-          <li><a href="mailto:tu.correo@ejemplo.com">Correo</a></li>
-          <li><a href="#">Google Scholar</a></li>
-          <li><a href="#">ORCID</a></li>
-          <li><a href="#">GitHub</a></li>
+          <li><a href="mailto:jose.cerda@dataobservatory.net">Correo</a></li>
+          <li><a href="https://scholar.google.es/citations?user=U6CL5OYAAAAJ&hl=es">Google Scholar</a></li>
+          <li><a href="https://orcid.org/0000-0002-0087-5494">ORCID</a></li>
+          <li><a href="https://www.researchgate.net/profile/Jose-Cerda-Paredes-2">ResearchGate</a></li>
+          <li><a href="https://github.com/jmcerda-paredes">GitHub</a></li>
         </ul>
       </div>
-
       <!-- Ilustración: arbusto, huella del satélite y píxeles -->
-      <svg class="hero-art" viewBox="0 0 560 600" role="img" aria-label="Dibujo de un arbusto observado por un satélite, con píxeles que suben desde las hojas">
-        <defs>
-          <clipPath id="fp"><ellipse cx="300" cy="546" rx="176" ry="27"/></clipPath>
-        </defs>
-        <!-- huella y rejilla de píxeles -->
-        <g clip-path="url(#fp)" class="ink thin">
-          <path d="M120 520 L480 520 M120 529 L480 529 M120 538 L480 538 M120 547 L480 547 M120 556 L480 556 M120 565 L480 565"/>
-          <path d="M140 515V580 M162 515V580 M184 515V580 M206 515V580 M228 515V580 M250 515V580 M272 515V580 M294 515V580 M316 515V580 M338 515V580 M360 515V580 M382 515V580 M404 515V580 M426 515V580 M448 515V580 M470 515V580"/>
-        </g>
-        <ellipse cx="300" cy="546" rx="176" ry="27" class="ink"/>
-        <path d="M444 108 L126 544 M450 108 L474 546" class="ink dash thin" style="opacity:.7"/>
-
-        <!-- satélite -->
-        <g transform="translate(446 82) rotate(-18)" class="ink">
-          <rect x="-18" y="-14" width="36" height="28" rx="2" class="fill-paper"/>
-          <path d="M-18 -6 H18 M-6 -14 V14"/>
-          <rect x="-80" y="-9" width="56" height="18" class="fill-paper"/>
-          <path d="M-61 -9 V9 M-42 -9 V9 M-80 0 H-24 M-24 0 H-18"/>
-          <rect x="24" y="-9" width="56" height="18" class="fill-paper"/>
-          <path d="M43 -9 V9 M62 -9 V9 M24 0 H80 M18 0 H24"/>
-          <path d="M-6 14 L-8 22 H8 L6 14"/>
-          <path d="M0 -14 V-26"/><circle cx="0" cy="-29" r="3"/>
-        </g>
-
-        <!-- tallos -->
-        <g class="ink" style="stroke-width:2">
-          <path d="M300 546 C298 480 292 420 296 360 C300 300 286 262 290 196"/>
-          <path d="M298 478 C272 452 240 430 200 412"/>
-          <path d="M296 424 C330 396 362 372 398 334"/>
-          <path d="M294 336 C270 306 248 284 222 252"/>
-          <path d="M292 282 C320 252 346 236 372 206"/>
-          <path d="M297 508 C330 490 362 478 394 462"/>
-        </g>
-        <!-- hojas -->
-        <g>
-          <use href="#leaf" width="54" height="28" transform="translate(200 412) rotate(200) translate(-2 -14)"/>
-          <use href="#leaf" width="54" height="28" transform="translate(232 428) rotate(140) translate(-2 -14)"/>
-          <use href="#leaf" width="54" height="28" transform="translate(252 446) rotate(215) translate(-2 -14)"/>
-          <use href="#leaf" width="54" height="28" transform="translate(398 334) rotate(-40) translate(-2 -14)"/>
-          <use href="#leaf" width="54" height="28" transform="translate(360 374) rotate(-5) translate(-2 -14)"/>
-          <use href="#leaf" width="54" height="28" transform="translate(340 388) rotate(-80) translate(-2 -14)"/>
-          <use href="#leaf" width="54" height="28" transform="translate(222 252) rotate(230) translate(-2 -14)"/>
-          <use href="#leaf" width="54" height="28" transform="translate(250 286) rotate(170) translate(-2 -14)"/>
-          <use href="#leaf" width="54" height="28" transform="translate(240 270) rotate(260) translate(-2 -14)"/>
-          <use href="#leaf" width="54" height="28" transform="translate(372 206) rotate(-50) translate(-2 -14)"/>
-          <use href="#leaf" width="54" height="28" transform="translate(340 236) rotate(10) translate(-2 -14)"/>
-          <use href="#leaf" width="54" height="28" transform="translate(330 244) rotate(-100) translate(-2 -14)"/>
-          <use href="#leaf" width="54" height="28" transform="translate(290 196) rotate(-95) translate(-2 -14)"/>
-          <use href="#leaf" width="54" height="28" transform="translate(290 200) rotate(-130) translate(-2 -14)"/>
-          <use href="#leaf" width="54" height="28" transform="translate(292 202) rotate(-60) translate(-2 -14)"/>
-          <use href="#leaf" width="54" height="28" transform="translate(394 462) rotate(-15) translate(-2 -14)"/>
-          <use href="#leaf" width="54" height="28" transform="translate(360 478) rotate(30) translate(-2 -14)"/>
-          <use href="#leaf" width="54" height="28" transform="translate(296 360) rotate(-150) translate(-2 -14)"/>
-          <use href="#leaf" width="54" height="28" transform="translate(296 352) rotate(-30) translate(-2 -14)"/>
-        </g>
-        <!-- hierbas -->
-        <path d="M160 552 l-6 -18 M160 552 l2 -20 M160 552 l9 -15 M420 548 l-5 -16 M420 548 l3 -19 M420 548 l10 -13 M236 560 l-4 -12 M236 560 l3 -14" class="ink"/>
-        <!-- píxeles que suben hacia el satélite -->
-        <g class="dot">
-          <rect x="318" y="160" width="12" height="12"/>
-          <rect x="344" y="138" width="10" height="10"/>
-          <rect x="368" y="150" width="7" height="7"/>
-          <rect x="380" y="118" width="9" height="9"/>
-          <rect x="404" y="128" width="6" height="6"/>
-          <rect x="412" y="104" width="5" height="5"/>
-          <rect x="258" y="178" width="8" height="8"/>
-          <rect x="196" y="320" width="10" height="10"/>
-          <rect x="420" y="396" width="8" height="8"/>
-          <rect x="178" y="470" width="6" height="6"/>
-          <rect x="426" y="290" width="5" height="5"/>
-        </g>
-      </svg>
+        <div class="torn-photo" data-edge="bottom">
+        <img src="img/Yo.jpeg" alt="Retrato de José Miguel Cerda-Paredes">
+      </div>
     </div>
   </div>
 
   <div class="band dark">
     <svg class="rip top-edge" data-seed="3" aria-hidden="true"></svg>
     <div class="wrap">
-      <h2>Qué investigo</h2>
+      <h2>Mis intereses</h2>
       <div class="themes">
         <div>
           <div class="sq"></div>
@@ -356,13 +345,13 @@ footer .big:hover{color:var(--accent)}
         </div>
         <div>
           <div class="sq"></div>
-          <h3>Teledetección a varias escalas</h3>
-          <p class="mute">Hasta qué punto un píxel captura la diversidad que medimos en el suelo. Trato la escala espacial como una propiedad del propio proceso de observación.</p>
+          <h3>Productos remotos</h3>
+          <p class="mute">Información a nivel de píxel y su relación con la realidad.</p>
         </div>
         <div>
           <div class="sq"></div>
-          <h3>Datos de campo representativos</h3>
-          <p class="mute">Bases de datos de parcelas como Parcelas-CL, y el problema de escalar resultados cuando los datos de campo no cubren todo el territorio.</p>
+          <h3>Bases de datos</h3>
+          <p class="mute">Colectar datos suficientes para poder generar información & conocimiento a partir de ellos.</p>
         </div>
       </div>
     </div>
@@ -371,64 +360,174 @@ footer .big:hover{color:var(--accent)}
 
   <div class="band">
     <div class="wrap now">
-      <h2>Ahora</h2>
+      <h2>Hoy por hoy</h2>
       <ul>
-        <li><span class="when">2026–hoy</span><span>En el CSIC (Madrid), modelando relaciones entre biodiversidad y funcionamiento en sabanas.</span></li>
-        <li><span class="when">Sept. 2026</span><span>Defendí mi tesis doctoral sobre el monitoreo escalable de la diversidad funcional de plantas.</span></li>
-        <li><span class="when">En curso</span><span>Publicando los capítulos de la tesis: una revisión sistemática, un estudio multiescala y la base de datos Parcelas-CL.</span></li>
+        <li><span class="when">Hoy</span><span> <b>Postdoc</b> - Laboratorio de Espectro-radiometría y Teledetección Ambiental  (<a href="https://speclab.csic.es/">SpecLab</a>), Instituto de Ciencias Agrarias del Consejo Superior de Investigación y Ciencias (ICA-CSIC), Madrid, España.</span></li>
+        <li><span class="when">Sept. 2026</span><span> <b>PhD en Data Science</b> - Facultad de Ingeniería y Ciencias, Universdida Adolfo Ibáñez, Santiago, Chile.</span></li>
+        <li><span class="when">Ago. 2022 - Sept. 2026</span><span> <b>Tesista de Doctorado</b> -  <a href="https://dataobservatory.net/">Data Observatory</a>, Santiago, Chile.</span></li>
       </ul>
     </div>
   </div>
 </section>
-
 <!-- =========================================================
      CV
      ========================================================= -->
 <section class="page" id="cv" aria-labelledby="h-cv" hidden>
   <div class="band page-head">
-    <div class="wrap">
+    <div class="wrap" style="grid-template-columns:1fr 1.4fr">
       <div>
         <h2 id="h-cv" tabindex="-1">Curriculum<br>vitae</h2>
-        <p class="lead">Ecólogo con formación doctoral en ciencia de datos. Combino trabajo de campo, teledetección y modelos estadísticos.</p>
-        <!-- Sube tu CV en PDF al repositorio con el nombre cv.pdf -->
-        <a class="btn" href="cv.pdf" download>Descargar CV en PDF</a>
+        <p class="lead"></p>
+        <a class="btn" href="docs/CV_JMCerda-Paredes.pdf" download>Descargar CV en PDF</a>
       </div>
-      <!-- Ilustración: parcela de muestreo -->
-      <svg class="art" viewBox="0 0 320 220" role="img" aria-label="Dibujo de una parcela de muestreo con estacas y plantas">
-        <path d="M40 150 L200 170 L280 110 L120 95 Z" class="ink"/>
-        <path d="M66.7 131.7 L226.7 150 M93.3 113.3 L253.3 130 M93.3 156.7 L173.3 100 M146.7 163.3 L226.7 105" class="ink thin"/>
-        <path d="M40 150 V170 M200 170 V192 M280 110 V128 M120 95 V110" class="ink" style="stroke-width:2.5"/>
-        <path d="M110 140 l-5 -16 M110 140 l2 -18 M110 140 l8 -13 M180 128 l-4 -14 M180 128 l2 -17 M180 128 l8 -12 M150 112 l-3 -12 M150 112 l2 -14 M218 146 l-5 -15 M218 146 l2 -18 M218 146 l9 -12" class="ink"/>
-        <use href="#leaf" width="54" height="28" transform="translate(70 70) rotate(-30) scale(.9) translate(-2 -14)"/>
-        <g class="dot"><rect x="236" y="54" width="10" height="10"/><rect x="258" y="38" width="7" height="7"/><rect x="276" y="56" width="5" height="5"/></g>
-      </svg>
+      <!-- Foto -->
+        <div class="torn-photo" data-edge="bottom" style="max-width:600px">
+        <img src="img/img3.jpeg" alt="Retrato de José Miguel Cerda-Paredes">
+      </div>
     </div>
   </div>
 
   <div class="band dark">
     <svg class="rip top-edge" data-seed="21" aria-hidden="true"></svg>
     <div class="wrap cv-grid">
-      <h3>Experiencia</h3>
-      <ul class="entries">
-        <li><span class="yr">2026–hoy</span><div><strong>Investigador, CSIC (Madrid)</strong><span class="mute">Relaciones biodiversidad–funcionamiento en sabanas mediante simulación con BOSSE, junto a Javier Pacheco-Labrador.</span></div></li>
-        <li><span class="yr">[año]–2026</span><div><strong>Investigador doctoral, Data Observatory Foundation</strong><span class="mute">Monitoreo de la diversidad funcional de plantas con datos de campo y teledetección.</span></div></li>
-      </ul>
 
+      <!-- ---------- FORMACIÓN ---------- -->
       <h3>Formación</h3>
       <ul class="entries">
-        <li><span class="yr">2026</span><div><strong>Doctorado en Ciencia de Datos, Universidad Adolfo Ibáñez</strong><span class="mute">Tesis: <em>Towards a Scalable Framework for Monitoring Plant Functional Diversity</em>. Dirigida por Javier Lopatin y Dylan Craven.</span></div></li>
-        <li><span class="yr">[año]</span><div><strong>[Título anterior], [Universidad]</strong><span class="mute">[Breve descripción o tesis]</span></div></li>
+        <li><span class="yr">2022–2024</span><div>
+          <strong>PhD en Data Science, Universidad Adolfo Ibáñez, Santiago, Chile.</strong>
+          <span class="mute">Facultad de Ingeniería y Ciencias. Supervisores: Dr. Javier Lopatin y Dr. Dylan Craven.</span>
+        </div></li>
+        <li><span class="yr">2022</span><div>
+          <strong>Diplomado en Big Data y Machine Learning, Pontificia Universidad Católica de Chile, Santiago, Chile.</strong>
+          <span class="mute">Facultad de Ingeniería.</span>
+        </div></li>
+        <li><span class="yr">2020–2022</span><div>
+          <strong>MSc en Recursos Naturales, Pontificia Universidad Católica de Chile, Santiago, Chile.</strong>
+          <span class="mute">Facultad de Agronomía y Sistemas Naturales. Supervisores: Dra. Rosanna Ginocchio y Dr. José Miguel Fariña.</span>
+        </div></li>
+        <li><span class="yr">2013–2018</span><div>
+          <strong>Licenciatura en Ciencias Biológicas, Pontificia Universidad Católica de Chile, Santiago, Chile.</strong>
+          <span class="mute">Facultad de Ciencias Biológicas.</span>
+        </div></li>
       </ul>
 
-      <h3>Herramientas</h3>
+      <!-- ---------- EXPERIENCIA ---------- -->
+      <h3>Experiencia</h3>
+      <ul class="entries">
+        <li><span class="yr">2026–hoy</span><div>
+          <strong>Investigador postdoctoral, <a href="https://speclab.csic.es/">SpecLab</a> (CSIC), Madrid, España.</strong>
+          <span class="mute">Proyecto: «Sistemas Integrados de Observación y Experimentos de Simulación para analizar las relaciones biodiversidad-función en ecosistemas de sabana».</span>
+          <ul class="tasks">
+            <li>Análisis de las relaciones biodiversidad-función en ecosistemas.</li>
+            <li>Desarrollo complementario de los Sistemas Integrados de Observación y Experimentos de Simulación (BOSSE).</li>
+            <li>Desarrollo de un módulo del paquete pyBOSSE para simular interacciones planta-planta.</li>
+          </ul>
+           </div></li>
+        <li><span class="yr">2018–hoy</span><div>
+          <strong>Analista biológico, Santiago</strong>
+          <span class="mute">Programas de monitoreo marino «PROMNA» y «MAPA», sección Biota Intermareal, Celulosa Arauco.</span>
+          <ul class="tasks">
+            <li>Gestión y ejecución de trabajo de campo: colecta de invertebrados de playas de arena en las regiones de Ñuble y Biobío.</li>
+            <li>Liderazgo de un equipo de trabajo de 6 personas.</li>
+            <li>Análisis de muestras: identificación taxonómica, tamaños corporales y métricas poblacionales.</li>
+            <li>Análisis estadísticos y elaboración de informes.</li>
+          </ul>
+        </div></li>
+        <li><span class="yr">2022–2026</span><div>
+          <strong>Asistente de investigación, Universidad Adolfo Ibáñez, Santiago, Chile.</strong>
+          <span class="mute">Levantamiento de datos para los proyectos «Efecto de la vegetación en la retroalimentación tierra-atmósfera en la zona mediterránea de Chile» [FONDECYT SA77210031] y «Upscaling Ecosystem Resilience to Climate Change in a Mediterranean ecosystem of Chile using Remote Sensing» [FONDECYT 11241088].</span>
+          <ul class="tasks">
+            <li>Gestión y ejecución de trabajo de campo: monitoreo de parcelas de vegetación en ecosistemas mediterráneos y muestreo de plantas.</li>
+            <li>Liderazgo de un equipo de trabajo de 4 personas.</li>
+            <li>Análisis de muestras y medición de rasgos funcionales.</li>
+          </ul>
+        </div></li>
+        <li><span class="yr">2022–2023</span><div>
+          <strong>Encargado de ecosistemas marinos, Centro de Información Territorial (UAI), Santiago, Chile.</strong>
+          <span class="mute">Servicio especializado en biodiversidad, licitación GCP-1001-07-OST-0138 (AMSA). Evaluación de servicios ecosistémicos marinos.</span>
+          <ul class="tasks">
+            <li>Gestión y ejecución de trabajo de campo.</li>
+            <li>Identificación y estimación visual de servicios ecosistémicos costeros en la zona centro de Chile.</li>
+          </ul>
+        </div></li>
+        <li><span class="yr">2019</span><div>
+          <strong>Asistente de campo, Pontificia Universidad Católica de Chile, Santiago, Chile.</strong>
+          <span class="mute">Proyecto «Espectros de tamaño de las comunidades de invertebrados de los humedales costeros en Chile: el papel de las perturbaciones» [FONDECYT 11180668].</span>
+          <ul class="tasks">
+            <li>Trabajo de campo: trampas <em>pitfall</em>, medición de salinidad y colecta de macroinvertebrados limnológicos.</li>
+            <li>Procesamiento de muestras: identificación taxonómica, conteo de abundancias y mediciones bajo lupa.</li>
+          </ul>
+        </div></li>
+        <li><span class="yr">2018–2022</span><div>
+          <strong>Encargado de laboratorio, Pontificia Universidad Católica de Chile, Santiago, Chile.</strong>
+          <span class="mute">Laboratorio de Ecología Comunitaria y Ecosistémica de la Interfase Mar-Tierra, Departamento de Ecología, Facultad de Ciencias Biológicas.</span>
+          <ul class="tasks">
+            <li>Administración del laboratorio y trabajo de campo.</li>
+            <li>Apoyo en el desarrollo de tesis de pre- y postgrado.</li>
+            <li>Procesamiento de muestras: rasgos funcionales de plantas e isótopos estables de suelo y plantas.</li>
+          </ul>
+       
+        </div></li>
+      </ul>
+
+
+      <!-- ---------- BECAS ---------- -->
+      <h3>Becas</h3>
+      <ul class="entries">
+        <li><span class="yr">2022–2024</span><div>
+          <strong>Tesista de doctorado, ANID Chile y <a href="https://dataobservatory.net/">Data Observatory</a></strong>
+          <span class="mute"><em>Plant functional diversity: insights at different scales from field ecology and remote sensing.</em></span>
+        </div></li>
+        <li><span class="yr">2017</span><div>
+          <strong>Beca de pregrado de investigación de verano, Pontificia Universidad Católica de Chile</strong>
+          <span class="mute">Laboratorio de Ictiología (Dr. Patricio Ojeda).</span>
+        </div></li>
+      </ul>
+
+      <!-- ---------- DOCENCIA ---------- -->
+      <h3>Docencia</h3>
+      <ul class="entries">
+        <li><span class="yr">2016–2026</span><div>
+          <strong>Pontificia Universidad Católica de Chile</strong>
+          <ul class="tasks">
+            <li>Estadística, profesor encargado, pregrado (2025–2026)</li>
+            <li>Fundamentos de Ecología y Evolución, profesor co-encargado, pregrado (2024–2026)</li>
+            <li>Fundamentos de Ecología y Evolución, ayudante instructor, pregrado (2016–2024)</li>
+            <li>Principios Ecológicos y Medio Ambiente, ayudante instructor, pregrado (2016–2025)</li>
+            <li>Restauración Ecológica, ayudante instructor, pregrado (2022)</li>
+            <li>Trabajo Experimental en Ecología, ayudante instructor, pregrado (2020)</li>
+            <li>Vertebrados Marinos, ayudante instructor, pregrado (2016–2018)</li>
+          </ul>
+        </div></li>
+        <li><span class="yr">2022–2023</span><div>
+          <strong>Universidad Adolfo Ibáñez</strong>
+          <ul class="tasks">
+            <li>Taller en Investigación y Desarrollo, ayudante instructor, postgrado (2023)</li>
+            <li>Bioestadística, ayudante instructor, postgrado (2022–2023)</li>
+          </ul>
+        </div></li>
+      </ul>
+
+      <!-- ---------- SUPERVISIÓN ---------- -->
+      <h3>Supervisión</h3>
+      <ul class="entries">
+        <li><span class="yr">2026</span><div>
+          <strong>Camila Henríquez, pregrado, Universidad de Las Américas</strong>
+          <span class="mute"><em>Análisis bibliométrico del uso de ciencia de datos en el diagnóstico y tratamiento de enfermedades equinas.</em></span>
+        </div></li>
+      </ul>
+
+      <!-- ---------- HABILIDADES E IDIOMAS ---------- -->
+      <h3>Habilidades</h3>
       <ul class="chips">
-        <li>R</li><li>Python</li><li>LaTeX</li><li>SIG</li><li>Teledetección multiescala</li>
-        <li>Modelos de ecuaciones estructurales</li><li>Bases de datos de vegetación</li><li>Revisión sistemática y bibliometría</li>
+        <li>Python (avanzado)</li><li>R (avanzado)</li><li>LaTeX</li><li>SIG (QGIS)</li><li>SQL</li><li>Git y GitHub</li>
+        <li>Análisis estadístico</li><li>Modelamiento ecológico</li><li>Diseño y ejecución de trabajo de campo</li><li>Comunicación científica</li>
       </ul>
 
       <h3>Idiomas</h3>
       <ul class="chips">
-        <li>Español (nativo)</li><li>Inglés ([nivel])</li>
+        <li>Español (nativo)</li><li>Inglés (avanzado)</li>
       </ul>
     </div>
     <svg class="rip bottom-edge" data-seed="34" aria-hidden="true"></svg>
@@ -443,76 +542,343 @@ footer .big:hover{color:var(--accent)}
   <div class="band page-head">
     <div class="wrap">
       <div>
-        <h2 id="h-colab" tabindex="-1">Con quién<br>trabajo</h2>
-        <p class="lead">Personas con las que he compartido proyectos, y en qué hemos trabajado juntos.</p>
+        <h2 id="h-colab" tabindex="-1">Con quién<br>he trabajado</h2>
+        <p class="lead"></p>
       </div>
       <!-- Ilustración: plantas conectadas por raíces -->
-      <svg class="art" viewBox="0 0 380 200" role="img" aria-label="Plantas unidas por una red de raíces">
-        <path d="M10 70 H370" class="ink"/>
-        <g class="ink">
-          <path d="M50 70 V40"/><path d="M140 70 V30"/><path d="M230 70 V44"/><path d="M320 70 V34"/>
-        </g>
-        <use href="#leaf" width="54" height="28" transform="translate(50 46) rotate(-130) scale(.6) translate(-2 -14)"/>
-        <use href="#leaf" width="54" height="28" transform="translate(50 42) rotate(-50) scale(.6) translate(-2 -14)"/>
-        <use href="#leaf" width="54" height="28" transform="translate(140 36) rotate(-120) scale(.7) translate(-2 -14)"/>
-        <use href="#leaf" width="54" height="28" transform="translate(140 32) rotate(-60) scale(.7) translate(-2 -14)"/>
-        <use href="#leaf" width="54" height="28" transform="translate(230 48) rotate(-140) scale(.55) translate(-2 -14)"/>
-        <use href="#leaf" width="54" height="28" transform="translate(230 46) rotate(-40) scale(.55) translate(-2 -14)"/>
-        <use href="#leaf" width="54" height="28" transform="translate(320 40) rotate(-125) scale(.65) translate(-2 -14)"/>
-        <use href="#leaf" width="54" height="28" transform="translate(320 36) rotate(-55) scale(.65) translate(-2 -14)"/>
-        <g class="ink">
-          <path d="M50 70 C52 100 70 120 95 132 C120 120 135 100 140 70"/>
-          <path d="M140 70 C142 104 160 128 185 140 C210 126 226 100 230 70"/>
-          <path d="M230 70 C234 102 252 124 275 134 C300 120 316 100 320 70"/>
-          <path d="M95 132 C120 160 160 168 185 140 M185 140 C215 166 250 160 275 134"/>
-          <path d="M50 70 C44 110 30 140 20 170 M320 70 C330 110 350 140 362 168"/>
-          <path d="M95 132 l-10 26 M275 134 l14 24 M185 140 v34" class="thin"/>
-        </g>
-        <g class="dot">
-          <rect x="90" y="127" width="10" height="10"/><rect x="180" y="135" width="10" height="10"/><rect x="270" y="129" width="10" height="10"/>
-          <rect x="132" y="155" width="6" height="6"/><rect x="226" y="155" width="6" height="6"/>
-        </g>
-      </svg>
+<!-- Foto -->
+      <div class="torn-photo" data-edge="top">
+        <img src="img/img2.jpeg" alt="Retrato de José Miguel Cerda-Paredes">
+      </div>
     </div>
   </div>
 
   <div class="band" style="padding-top:0">
     <div class="wrap">
-      <!-- Para añadir un proyecto, copia un bloque <article class="project"> completo -->
-      <article class="project">
-        <header>
-          <h3>Tesis doctoral</h3>
-          <p class="mute">Monitoreo escalable de la diversidad funcional de plantas en Chile central. Universidad Adolfo Ibáñez y Data Observatory Foundation.</p>
-        </header>
-        <ul class="people">
-          <!-- Para añadir una persona, copia un <li> -->
-          <li><span class="name">Javier Lopatin</span><span class="role">Director de tesis</span><span>Dirección de la tesis doctoral: teledetección y diversidad espectral.</span></li>
-          <li><span class="name">Dylan Craven</span><span class="role">Codirector de tesis</span><span>Codirección de la tesis doctoral: ecología funcional.</span></li>
-          <li><span class="name">Sebastián Moreno, Mauricio Galleguillos y Gonzalo Ruz</span><span class="role">Comité de tesis</span><span>Evaluación y seguimiento de la tesis.</span></li>
-        </ul>
-      </article>
+      <!--
+        Cada etapa es un <li class="stage">. Para añadir una persona,
+        copia un <li> dentro de <ul class="collab">.
+        Los nombres se enlazan solos si están en la lista PEOPLE (al final del archivo).
+      -->
+      <ol class="stages">
+         <li class="stage">
+          <div class="stage-head">
+        
+            <h3>Postdoc</h3>
+          </div>
+          <ul class="collab">
+            <li>
+              <span class="name">Javier Pacheco-Labrador</span>
+              <span><a class="cite" href="https://doi.org/10.64898/2026.02.19.706857" target="_blank" rel="noopener">Cerda-Paredes et al. (2026) [<i>Preprint</i>]</a>
+            </li>
+          </ul>
+        </li>
 
-      <article class="project">
-        <header>
-          <h3>Biodiversidad y funcionamiento en sabanas</h3>
-          <p class="mute">CSIC, Madrid.</p>
-        </header>
-        <ul class="people">
-          <li><span class="name">Javier Pacheco-Labrador</span><span class="role">Responsable del proyecto</span><span>Simulación de relaciones biodiversidad–funcionamiento en sabanas con BOSSE.</span></li>
-        </ul>
-      </article>
+        <li class="stage">
+          <div class="stage-head">
+           
+            <h3>Doctorado</h3>
+          </div>
+          <ul class="collab">
+            <li>
+              <span class="name">Javier Lopatin<br>(Supervisor doctorado)</span>
+              <span><a class="cite" href="https://doi.org/10.1609/aaai.v40i46.41272" target="_blank" rel="noopener">Sharma et al. (2026)</a>;
+                <span><a class="cite" href="https://doi.org/10.1002/ecog.08305" target="_blank" rel="noopener">Pérez-Giraldo et al. (2026)</a>;
+                  <span><a class="cite" href="https://doi.org/10.64898/2026.02.19.706857" target="_blank" rel="noopener">Cerda-Paredes et al. (2026) [<i>Preprint</i>]</a>;
+                    <span><a class="cite" href="https://doi.org/10.21203/rs.3.rs-9986019/v1" target="_blank" rel="noopener">Cerda-Paredes et al. (2026) [<i>Preprint</i>]</a>
+                  </span>
+            </li>
+            <li>
+              <span class="name">Dylan Craven<br>(Supervisor doctorado)</span>
+                <span><a class="cite" href="https://doi.org/10.1002/ecog.08305" target="_blank" rel="noopener">Pérez-Giraldo et al. (2026)</a>;
+                  <span><a class="cite" href="https://doi.org/10.64898/2026.02.19.706857" target="_blank" rel="noopener">Cerda-Paredes et al. (2026) [<i>Preprint</i>]</a>;
+                    <span><a class="cite" href="https://doi.org/10.21203/rs.3.rs-9986019/v1" target="_blank" rel="noopener">Cerda-Paredes et al. (2026) [<i>Preprint</i>]</a>
+                  </span>
+            </li>
+            <li>
+              <span class="name">Laura Pérez-Giraldo</span>
+              <span><a class="cite" href="https://doi.org/10.1002/ecog.08305" target="_blank" rel="noopener">Pérez-Giraldo et al. (2026)</a>;
+                <span><a class="cite" href="https://doi.org/10.26786/1920-7603(2026)869" target="_blank" rel="noopener">Pérez-Giraldo et al. (2026)</a>;
+            </li>
+          </ul>
+        </li>  
 
-      <article class="project">
-        <header>
-          <h3>[Otro proyecto]</h3>
-          <p class="mute">[Institución, años]</p>
-        </header>
-        <ul class="people">
-          <li><span class="name">[Nombre]</span><span class="role">[Rol]</span><span>[En qué colaboramos]</span></li>
-        </ul>
-      </article>
+         <li class="stage">
+          <div class="stage-head">
+           
+            <h3>Magíster</h3>
+          </div>
+          <ul class="collab">
+            <li>
+              <span class="name">Rosanna Ginocchio<br>(Supervisora magíster)</span>
+              <span><a class="cite" href="https://doi.org/10.1016/j.flora.2023.152447" target="_blank" rel="noopener">Cerda et al. (2024)</a>
+              </span>
+            </li>
+            <li>
+              <span class="name">José Miguel Fariña<br>(Supervisor magíster)</span>
+              <span><a class="cite" href="https://doi.org/10.1016/j.flora.2023.152447" target="_blank" rel="noopener">Cerda et al. (2024)</a>
+              </span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="stage">
+          <div class="stage-head">
+            
+            <h3>Pregrado</h3>
+            <span class="stamp">Pasado marino</span>
+          </div>
+          <ul class="collab">
+            <li>
+              <span class="name">Patricio Ojeda<br>(Supervisor pregrado)</span>
+              <span><a class="cite" href="https://doi.org/10.1111/jai.13952" target="_blank" rel="noopener">Cerda et al. (2019)</a>;
+              <a class="cite" href="https://doi.org/10.1016/j.seares.2021.102063" target="_blank" rel="noopener">Cerda et al. (2021)</a></span>
+            </li>
+            <li>
+              <span class="name">Mariana Díaz-Santana-Iturrios</span>
+              <span><a class="cite" href="https://doi.org/10.1016/j.seares.2021.102063" target="_blank" rel="noopener">Cerda et al. (2021)</a>;
+              <a class="cite" href="https://doi.org/10.4002/040.064.0202" target="_blank" rel="noopener">Díaz-Santana-Iturrios et al. (2022)</a></span>
+            </li>
+          </ul>
+        </li>    
+
+      </ol>
     </div>
   </div>
+</section>
+
+
+<!-- =========================================================
+     CONTRIBUCIONES
+     ========================================================= -->
+<section class="page" id="contribuciones" aria-labelledby="h-contrib" hidden>
+  <div class="band page-head">
+    <div class="wrap">
+      <div>
+        <h2 id="h-contrib" tabindex="-1">Contri&shy;buciones</h2>
+        <p class="lead">Artículos, preprints, presentaciones en congresos, bases de datos y código.</p>
+      </div>
+      <!-- Ilustración: firma espectral de la vegetación -->
+      <!-- Foto -->
+      <div class="torn-photo" data-edge="right">
+        <img src="img/img4.jpeg" alt="Retrato de José Miguel Cerda-Paredes">
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="band dark">
+    <svg class="rip top-edge" data-seed="55" aria-hidden="true"></svg>
+    <div class="wrap">
+      <ul class="filter" id="filter">
+        <li><button type="button" data-f="all" aria-pressed="true">Todo</button></li>
+        <li><button type="button" data-f="articulo" aria-pressed="false">Artículos</button></li>
+        <li><button type="button" data-f="preprint" aria-pressed="false">Preprints</button></li>
+        <li><button type="button" data-f="conferencia" aria-pressed="false">Conferencias</button></li>
+        <li><button type="button" data-f="datos" aria-pressed="false">Bases de datos</button></li>
+      </ul>
+      <p class="counts mute" id="counts" aria-live="polite"></p>
+
+      <!--
+        PARA AÑADIR UNA CONTRIBUCIÓN: copia un <li> completo y cambia data-type.
+        Tipos: articulo, preprint, conferencia, datos
+        Tu nombre va entre <b>...</b> para que se destaque.
+      -->
+      <ul class="works" id="works">
+
+        <!-- ================= ARTÍCULOS ================= -->
+        <li data-type="articulo">
+          <span class="yr">2026</span>
+          <div>
+            <a class="t" href="https://doi.org/10.26786/1920-7603(2026)869">The ecological and functional value of native bees in avocado (<em>Persea americana</em>) pollination</a>
+            <span class="authors">Pérez-Giraldo L.C., <b>Cerda-Paredes J.M.</b>, Rodríguez S.</span>
+            <span class="venue"><em>Journal of Pollination Ecology</em>.</span>
+          </div>
+          <span class="type">Artículo</span>
+        </li>
+        <li data-type="articulo">
+          <span class="yr">2026</span>
+          <div>
+            <a class="t" href="https://doi.org/10.1002/ecog.08305">Environmental heterogeneity and spatial variation mediates plant diversity and ecosystem stability in mountain ecosystems of the Mediterranean Andes</a>
+            <span class="authors">Pérez-Giraldo L.C., <b>Cerda-Paredes J.M.</b>, Craven D., Lopatin J.</span>
+            <span class="venue"><em>Ecography</em>, e08305.</span>
+          </div>
+          <span class="type">Artículo</span>
+        </li>
+        <li data-type="articulo">
+          <span class="yr">2026</span>
+          <div>
+            <a class="t" href="https://doi.org/10.1609/aaai.v40i46.41272">PlantTraitNet: an uncertainty-aware multimodal framework for global-scale plant trait inference from citizen science data</a>
+            <span class="authors">Sharma A., Trost J., Lusk D., Dollinger J., Schrader J., Rossi C., Lopatin J., Laliberté E., Haberstroh S., Eichel J., Mederer D., <b>Cerda-Paredes J.M.</b>, Phartyal S.S., Schwarz L.-M., Linstädter A., Caldeira M.C., Kattenborn T.</span>
+            <span class="venue"><em>Proceedings of the AAAI Conference on Artificial Intelligence</em>, 40, 39239–39248.</span>
+          </div>
+          <span class="type">Artículo</span>
+        </li>
+        <li data-type="articulo">
+          <span class="yr">2024</span>
+          <div>
+            <a class="t" href="https://doi.org/10.1016/j.flora.2023.152447">Coexistence of <em>Ambrosia chamissonis</em> and <em>Ammophila arenaria</em> in coastal dunes in the Ñuble Region, Chile</a>
+            <span class="authors"><b>Cerda-Paredes J.M.</b>, Ginocchio R., Fariña J.M.</span>
+            <span class="venue"><em>Flora</em>, 310, 152447.</span>
+          </div>
+          <span class="type">Artículo</span>
+        </li>
+        <li data-type="articulo">
+          <span class="yr">2022</span>
+          <div>
+            <a class="t" href="https://doi.org/10.4002/040.064.0202">Northeastern Pacific octopus beak shape for species-level detection</a>
+            <span class="authors">Díaz-Santana-Iturrios M., Zepeda-Benitez V., Pacheco-Ovando R., Cornejo C.F., <b>Cerda J.M.</b>, Salinas-Zavala C.A., Granados-Amores J.</span>
+            <span class="venue"><em>Malacologia</em>, 64(2), 169–184.</span>
+          </div>
+          <span class="type">Artículo</span>
+        </li>
+        <li data-type="articulo">
+          <span class="yr">2021</span>
+          <div>
+            <a class="t" href="https://doi.org/10.1016/j.seares.2021.102063">Description and discrimination of sagittae otoliths of two sympatric labrisomid blennies <em>Auchenionchus crinitus</em> and <em>Auchenionchus microcirrhis</em> using morphometric analyses</a>
+            <span class="authors"><b>Cerda J.M.</b>, Palacios-Fuentes P., Díaz-Santana-Iturrios M., Ojeda F.P.</span>
+            <span class="venue"><em>Journal of Sea Research</em>, 173, 102063.</span>
+          </div>
+          <span class="type">Artículo</span>
+        </li>
+        <li data-type="articulo">
+          <span class="yr">2019</span>
+          <div>
+            <a class="t" href="https://doi.org/10.1111/jai.13952">Genetic structure analysis of <em>Girella laevifrons</em> populations in central Chile</a>
+            <span class="authors"><b>Cerda J.M.</b>, López F., Palacios-Fuentes P., Ojeda F.P.</span>
+            <span class="venue"><em>Journal of Applied Ichthyology</em>, 35(5), 1147–1153.</span>
+          </div>
+          <span class="type">Artículo</span>
+        </li>
+
+        <!-- ================= PREPRINTS ================= -->
+        <li data-type="preprint">
+          <span class="yr">2026</span>
+          <div>
+            <a class="t" href="https://doi.org/10.21203/rs.3.rs-9986019/v1">Parcelas-CL: a community-sourced vegetation dataset for multi-scale biodiversity monitoring in Chile</a>
+            <span class="authors"><b>Cerda-Paredes J.M.</b>, Miranda A., Altamirano A., Becerra P.I., Dobbs C., Galleguillos M., Miranda M.D., Morales N.S., Ovalle J.F., Venegas-González A., Zamorano-Elgueta C., Craven D., Lopatin J.</span>
+            <span class="venue">Research Square.</span>
+          </div>
+          <span class="type">Preprint</span>
+        </li>
+        <li data-type="preprint">
+          <span class="yr">2026</span>
+          <div>
+            <a class="t" href="https://doi.org/10.64898/2026.02.19.706857">Bridging the gaps between field-based ecology and remote sensing to estimate plant functional diversity: a systematic review</a>
+            <span class="authors"><b>Cerda-Paredes J.M.</b>, Pacheco-Labrador J., Craven D., Lopatin J.</span>
+            <span class="venue">bioRxiv.</span>
+          </div>
+          <span class="type">Preprint</span>
+        </li>
+
+        <!-- ================= CONFERENCIAS ================= -->
+        <li data-type="conferencia">
+          <span class="yr">2026</span>
+          <div>
+            <span class="t">Bridging the gaps between field-based ecology and remote sensing to estimate plant functional diversity: a systematic review</span>
+            <span class="authors"><b>Cerda-Paredes J.M.</b>, Craven D., Lopatin J.</span>
+            <span class="venue">EGU26 General Assembly, Viena (Austria). Presentación virtual.</span>
+          </div>
+          <span class="type">Conferencia</span>
+        </li>
+        <li data-type="conferencia">
+          <span class="yr">2025</span>
+          <div>
+            <span class="t">Functional diversity of plants in semi-arid ecosystems: influence of topographic complexity and elevation in the Mediterranean Andes of Chile</span>
+            <span class="authors"><b>Cerda-Paredes J.M.</b>, Pérez-Giraldo L.C., Kimura A., Craven D., Lopatin J.</span>
+            <span class="venue">International Symposium on Climate and Resilience (CR2), Viña del Mar (Chile). Póster. <a href="https://simposio.cr2.cl/wp-content/uploads/2026/01/LibroResumenes2025.pdf">Libro de resúmenes (p. 83)</a></span>
+          </div>
+          <span class="type">Conferencia</span>
+        </li>
+        <li data-type="conferencia">
+          <span class="yr">2025</span>
+          <div>
+            <span class="t">Collaborative assessment of the distribution and diversity of sclerophyllous forests</span>
+            <span class="authors"><b>Cerda-Paredes J.M.</b>, Altamirano A., Becerra P.I., Dobbs C., Galleguillos M., Miranda A., Miranda M.D., Morales N.S., Ovalle J.F., Venegas-González A., Zamorano-Elgueta C., Craven D., Lopatin J.</span>
+            <span class="venue">I Reunión Trinacional de Ecología, Mendoza (Argentina). Póster. <a href="https://ianigla.net/rae2025/libro/archivos/459.pdf">Libro de resúmenes</a></span>
+          </div>
+          <span class="type">Conferencia</span>
+        </li>
+        <li data-type="conferencia">
+          <span class="yr">2025</span>
+          <div>
+            <span class="t">Esclerófilo-CL: a database of sampling plots in the sclerophyllous forest in Chile</span>
+            <span class="authors"><b>Cerda-Paredes J.M.</b>, Altamirano A., Becerra P.I., Dobbs C., Galleguillos M., Miranda A., Miranda M.D., Morales N.S., Ovalle J.F., Venegas-González A., Zamorano-Elgueta C., Craven D., Lopatin J.</span>
+            <span class="venue">V Reunión Bienal de la Sociedad de Ecología del Paisaje de Chile (IALE-Chile), Santiago (Chile). Oral. <a href="https://70faab0d-6316-467d-9b59-c09827bd5141.filesusr.com/ugd/9fc14c_e2e62ad729be4911beee7b1c8f755296.pdf?index=true">Libro de resúmenes (p. 56)</a></span>
+          </div>
+          <span class="type">Conferencia</span>
+        </li>
+        <li data-type="conferencia">
+          <span class="yr">2025</span>
+          <div>
+            <span class="t">A comparative analysis of field-based ecology and remote sensing approaches to plant functional diversity</span>
+            <span class="authors"><b>Cerda-Paredes J.M.</b>, Pacheco-Labrador J., Craven D., Lopatin J.</span>
+            <span class="venue">BIOSPACE25, Frascati (Italia). Oral. <a href="https://biospace25.esa.int/iframe-agenda/files/ID326_Cerda-Paredes.pdf">Presentación</a></span>
+          </div>
+          <span class="type">Conferencia</span>
+        </li>
+        <li data-type="conferencia">
+          <span class="yr">2023</span>
+          <div>
+            <span class="t">Occurrence of dry spells in central Chile: historical record and projections in light of climate change</span>
+            <span class="authors"><b>Cerda-Paredes J.M.</b>, Berroeta D., Vega V., Martinez-Villalobos C.</span>
+            <span class="venue">I Congreso Data Science, <a href="https://dataobservatory.net/">Data Observatory</a>, Santiago (Chile). Póster.</span>
+          </div>
+          <span class="type">Conferencia</span>
+        </li>
+        <li data-type="conferencia">
+          <span class="yr">2023</span>
+          <div>
+            <span class="t">Plant trait diversity: bibliometric analysis of the gap between classical ecology and remote sensing</span>
+            <span class="authors"><b>Cerda-Paredes J.M.</b>, Pérez-Giraldo L.C., Craven D., Lopatin J.</span>
+            <span class="venue">International Symposium on Climate and Resilience (CR2), Viña del Mar (Chile). Póster. <a href="https://www.cr2.cl/wp-content/uploads/2023/08/resumenes_Sicyr.pdf">Libro de resúmenes (p. 419)</a></span>
+          </div>
+          <span class="type">Conferencia</span>
+        </li>
+        <li data-type="conferencia">
+          <span class="yr">2022</span>
+          <div>
+            <span class="t">Coexistence of <em>Ambrosia chamissonis</em> and <em>Ammophila arenaria</em> in coastal dunes in the Ñuble Region, Chile</span>
+            <span class="authors"><b>Cerda-Paredes J.M.</b>, Ginocchio R., Fariña J.M.</span>
+            <span class="venue">LXV Reunión Anual de la Sociedad de Biología de Chile, Pucón (Chile). Póster. <a href="https://www.biologiachile.cl/wp-content/uploads/2023/01/Libro-de-resumenes-SocBio-2022-v5.pdf">Libro de resúmenes (p. 69)</a></span>
+          </div>
+          <span class="type">Conferencia</span>
+        </li>
+        <li data-type="conferencia">
+          <span class="yr">2018</span>
+          <div>
+            <span class="t">Connectivity of <em>Girella laevifrons</em> populations along the Chilean coast</span>
+            <span class="authors"><b>Cerda-Paredes J.M.</b>, López F., Ojeda F.P.</span>
+            <span class="venue">XXXVIII Congreso de Ciencias del Mar, Valdivia (Chile). Póster. <a href="https://schcm.cl/images/biblioteca/038.pdf">Libro de resúmenes (p. 546)</a></span>
+          </div>
+          <span class="type">Conferencia</span>
+        </li>
+
+        <!-- ================= BASES DE DATOS Y CÓDIGO ================= -->
+        <li data-type="datos">
+          <span class="yr">2026</span>
+          <div>
+            <a class="t" href="https://doi.org/10.5281/zenodo.20602096">Parcelas-CL</a>
+            <span class="authors"><b>Cerda-Paredes J.M.</b>, Miranda A., Altamirano A., Becerra P., Dobbs C., Galleguillos M., Miranda M., Morales San Martín N., Ovalle J.F., Venegas-González A., Zamorano-Elgueta C., Craven D., Lopatin J.</span>
+            <span class="venue">Base de datos. Zenodo.</span>
+          </div>
+          <span class="type">Base de datos</span>
+        </li>
+        <li data-type="datos">
+          <span class="yr">2026</span>
+          <div>
+            <a class="t" href="https://doi.org/10.5281/zenodo.18684166">Functional diversity in ecology and remote sensing</a>
+            <span class="authors"><b>Cerda-Paredes J.M.</b></span>
+            <span class="venue">Software. Zenodo.</span>
+          </div>
+          <span class="type">Software</span>
+        </li>
+      </ul>
+    </div>
+    <svg class="rip bottom-edge" data-seed="89" aria-hidden="true"></svg>
+  </div>
+  <div class="band" style="padding-bottom:20px"></div>
 </section>
 
 <!-- =========================================================
@@ -522,16 +888,25 @@ footer .big:hover{color:var(--accent)}
   <div class="band page-head">
     <div class="wrap">
       <div>
-        <h2 id="h-blog" tabindex="-1">Notas de<br>campo</h2>
-        <p class="lead">Opiniones, comentarios a artículos y recomendaciones sobre ecología, teledetección y la vida académica.</p>
+        <h2 id="h-blog" tabindex="-1">Pensamientos</h2>
+        <p class="lead"></p>
       </div>
       <!-- Ilustración: lupa sobre una hoja -->
-      <svg class="art" viewBox="0 0 260 200" role="img" aria-label="Lupa sobre una hoja">
-        <use href="#leaf" width="54" height="28" transform="translate(20 120) rotate(-28) scale(3.4) translate(-2 -14)"/>
-        <circle cx="150" cy="78" r="50" class="ink fill-paper" style="fill-opacity:.55;stroke-width:2"/>
-        <path d="M186 114 L232 166" class="ink" style="stroke-width:7"/>
-        <path d="M126 70 l14 -10 M132 86 l16 -8 M146 98 l14 -6" class="ink thin"/>
-        <g class="dot"><rect x="140" y="64" width="9" height="9"/><rect x="162" y="80" width="6" height="6"/><rect x="214" y="42" width="8" height="8"/><rect x="232" y="24" width="5" height="5"/></g>
+         <!-- Ilustración: Don't quit (las líneas tachan letras y dejan leer "DO IT") -->
+      <svg class="art" viewBox="0 0 400 250" role="img" aria-label="Don't quit, con líneas que tachan letras para leer Do it">
+        <g style="font-family:'Cinzel', Georgia, 'Times New Roman', serif;font-size:92px;fill:var(--ink)" text-anchor="middle">
+          <text x="70"  y="112">D</text>
+          <text x="152" y="112">O</text>
+          <text x="236" y="112">N</text>
+          <text x="284" y="112">’</text>
+          <text x="330" y="112">T</text>
+          <text x="134" y="210">Q</text>
+          <text x="214" y="210">U</text>
+          <text x="272" y="210">I</text>
+          <text x="326" y="210">T</text>
+        </g>
+        <path d="M200 84 H400" style="stroke:var(--ink);stroke-width:8"/>
+        <path d="M0 182 H252" style="stroke:var(--ink);stroke-width:8"/>
       </svg>
     </div>
   </div>
@@ -547,156 +922,27 @@ footer .big:hover{color:var(--accent)}
 
       <div class="posts" id="posts">
         <!--
-          PARA AÑADIR UNA ENTRADA: copia un bloque <details class="post"> completo
-          y pégalo ARRIBA del todo (la más reciente primero).
-          data-tag puede ser: opinion, comentario o recomendacion
+          Las entradas ya no se escriben aquí: cada una es un archivo .md en la carpeta blog/
+          y se registran en blog/posts.json. Ver las instrucciones en ese archivo.
         -->
-        <details class="post" data-tag="opinion">
-          <summary>
-            <time datetime="2026-11-03">3 nov 2026</time>
-            <span class="ttl-wrap"><span class="ttl">Por qué abro este blog</span><br><span class="tag">Opinión</span></span>
-            <span class="plus" aria-hidden="true"></span>
-          </summary>
-          <div class="body">
-            <p>[Escribe aquí tu primera entrada. Por ejemplo: qué tipo de cosas vas a publicar, con qué frecuencia y para quién escribes.]</p>
-            <p>Los párrafos van entre etiquetas &lt;p&gt;. Para un subtítulo usa &lt;h4&gt;, y para un enlace &lt;a href="..."&gt;.</p>
-          </div>
-        </details>
-
-        <details class="post" data-tag="comentario">
-          <summary>
-            <time datetime="2026-10-20">20 oct 2026</time>
-            <span class="ttl-wrap"><span class="ttl">[Comentario sobre un artículo]</span><br><span class="tag">Comentario</span></span>
-            <span class="plus" aria-hidden="true"></span>
-          </summary>
-          <div class="body">
-            <p>[Referencia del artículo, con enlace al DOI.]</p>
-            <h4>Qué propone</h4>
-            <p>[Resumen breve en tus palabras.]</p>
-            <h4>Lo que me deja pensando</h4>
-            <p>[Tu lectura crítica.]</p>
-          </div>
-        </details>
-
-        <details class="post" data-tag="recomendacion">
-          <summary>
-            <time datetime="2026-10-05">5 oct 2026</time>
-            <span class="ttl-wrap"><span class="ttl">[Recomendación: libro, curso o herramienta]</span><br><span class="tag">Recomendación</span></span>
-            <span class="plus" aria-hidden="true"></span>
-          </summary>
-          <div class="body">
-            <h4>Qué es</h4>
-            <p>[Descripción breve.]</p>
-            <h4>Por qué lo recomiendo</h4>
-            <p>[Tu razón.]</p>
-            <h4>Para quién</h4>
-            <p>[A quién le servirá más.]</p>
-          </div>
-        </details>
+        <p class="mute" id="posts-status">Cargando entradas…</p>
       </div>
     </div>
   </div>
 </section>
-
-<!-- =========================================================
-     CONTRIBUCIONES
-     ========================================================= -->
-<section class="page" id="contribuciones" aria-labelledby="h-contrib" hidden>
-  <div class="band page-head">
-    <div class="wrap">
-      <div>
-        <h2 id="h-contrib" tabindex="-1">Contri&shy;buciones</h2>
-        <p class="lead">Todo lo que he producido: artículos, bases de datos, presentaciones en congresos, software y divulgación.</p>
-      </div>
-      <!-- Ilustración: firma espectral de la vegetación -->
-      <svg class="art" viewBox="0 0 360 210" role="img" aria-label="Curva de reflectancia espectral de la vegetación">
-        <path d="M24 186 H344 M24 186 V20" class="ink"/>
-        <path d="M24 186 m0 0 h6 M24 140 h6 M24 94 h6 M24 48 h6" class="ink thin"/>
-        <path d="M30 172 C50 170 62 168 72 160 C80 154 88 154 96 162 C106 172 116 176 124 172 C134 166 140 110 152 72 C160 52 176 50 200 50 C228 50 246 52 256 60 C262 66 266 80 272 84 C278 86 282 64 292 62 C302 62 306 92 314 118 C320 132 326 108 334 98 C338 94 342 96 344 100" class="ink" style="stroke-width:2"/>
-        <g class="dot">
-          <rect x="47" y="164" width="8" height="8"/><rect x="83" y="150" width="8" height="8"/><rect x="113" y="168" width="8" height="8"/>
-          <rect x="142" y="94" width="8" height="8"/><rect x="196" y="46" width="8" height="8"/><rect x="268" y="80" width="8" height="8"/><rect x="310" y="114" width="8" height="8"/>
-        </g>
-        <text x="330" y="204" font-family="IBM Plex Mono" font-size="11" class="mute" fill="currentColor">λ</text>
-      </svg>
-    </div>
-  </div>
-
-  <div class="band dark">
-    <svg class="rip top-edge" data-seed="55" aria-hidden="true"></svg>
-    <div class="wrap">
-      <ul class="filter" id="filter">
-        <li><button type="button" data-f="all" aria-pressed="true">Todo</button></li>
-        <li><button type="button" data-f="articulo" aria-pressed="false">Artículos</button></li>
-        <li><button type="button" data-f="datos" aria-pressed="false">Bases de datos</button></li>
-        <li><button type="button" data-f="conferencia" aria-pressed="false">Conferencias</button></li>
-        <li><button type="button" data-f="tesis" aria-pressed="false">Tesis</button></li>
-        <li><button type="button" data-f="software" aria-pressed="false">Software</button></li>
-        <li><button type="button" data-f="divulgacion" aria-pressed="false">Divulgación</button></li>
-      </ul>
-      <p class="counts mute" id="counts" aria-live="polite"></p>
-
-      <!--
-        PARA AÑADIR UNA CONTRIBUCIÓN: copia un <li> y cambia data-type.
-        Tipos: articulo, datos, conferencia, tesis, software, divulgacion
-        Para enlazar, envuelve el título así: <a class="t" href="https://doi.org/...">Título</a>
-      -->
-      <ul class="works" id="works">
-        <li data-type="articulo">
-          <span class="yr">2026</span>
-          <div><span class="t">Revisión sistemática y análisis bibliométrico de la relación entre diversidad espectral y diversidad funcional de plantas</span>
-            <span class="mute">Cerda J.M. et al. Science of Remote Sensing.</span><br><span class="status">Enviado</span></div>
-          <span class="type">Artículo</span>
-        </li>
-        <li data-type="articulo">
-          <span class="yr">2026</span>
-          <div><span class="t">Parcelas-CL: una base de datos estandarizada de parcelas de vegetación georreferenciadas para el centro-sur de Chile</span>
-            <span class="mute">Cerda J.M. et al. Landscape Ecology.</span><br><span class="status">En revisión</span></div>
-          <span class="type">Artículo</span>
-        </li>
-        <li data-type="datos">
-          <span class="yr">2026</span>
-          <div><span class="t">Parcelas-CL</span>
-            <span class="mute">Base de datos de parcelas de vegetación georreferenciadas y estandarizadas, centro-sur de Chile. [Enlace al repositorio]</span></div>
-          <span class="type">Base de datos</span>
-        </li>
-        <li data-type="articulo">
-          <span class="yr">2026</span>
-          <div><span class="t">Relaciones entre diversidad espectral y funcional a varias escalas a lo largo de un gradiente altitudinal en la cuenca del Mapocho</span>
-            <span class="mute">Cerda J.M. et al.</span><br><span class="status">En preparación</span></div>
-          <span class="type">Artículo</span>
-        </li>
-        <li data-type="tesis">
-          <span class="yr">2026</span>
-          <div><span class="t">Towards a Scalable Framework for Monitoring Plant Functional Diversity</span>
-            <span class="mute">Tesis doctoral, Universidad Adolfo Ibáñez. Defendida el 8 de septiembre de 2026.</span></div>
-          <span class="type">Tesis</span>
-        </li>
-        <li data-type="conferencia">
-          <span class="yr">[año]</span>
-          <div><span class="t">[Título de la presentación o póster]</span>
-            <span class="mute">[Congreso, ciudad]. [Oral / póster]</span></div>
-          <span class="type">Conferencia</span>
-        </li>
-      </ul>
-    </div>
-    <svg class="rip bottom-edge" data-seed="89" aria-hidden="true"></svg>
-  </div>
-  <div class="band" style="padding-bottom:20px"></div>
-</section>
-
 </main>
 
 <footer>
   <div class="wrap">
     <div>
       <p class="mute" style="margin-bottom:8px">Escríbeme</p>
-      <a class="big" href="mailto:tu.correo@ejemplo.com">tu.correo@ejemplo.com</a>
+      <a class="big" href="mailto:jose.cerda@dataobservatory.net">AQUÍ</a>
     </div>
     <p class="mute" style="font-size:12px;margin:0">Actualizado en noviembre de 2026</p>
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 <script>
 /* ---------- pestañas ---------- */
 (function(){
@@ -780,8 +1026,171 @@ function setupFilter(listId, itemsSel, attr, countEl){
   btns.forEach(function(b){ b.addEventListener('click', function(){ apply(b.dataset.f); }); });
   apply('all');
 }
+/* ---------- ordenar contribuciones: de la más nueva a la más antigua ---------- */
+(function(){
+  var list = document.getElementById('works');
+  var items = Array.prototype.slice.call(list.children);
+  function year(li){ var m = (li.querySelector('.yr') || {}).textContent.match(/\d{4}/g); return m ? +m[m.length-1] : 0; }
+  items.map(function(li, i){ return {li:li, y:year(li), i:i}; })
+       .sort(function(a, b){ return b.y - a.y || a.i - b.i; })
+       .forEach(function(o){ list.appendChild(o.li); });
+})();
+
 setupFilter('filter', '#works > li', 'data-type', document.getElementById('counts'));
-setupFilter('blog-filter', '#posts > .post', 'data-tag', null);
+/* ---------- borde rasgado en fotos ---------- */
+document.querySelectorAll('.torn-photo').forEach(function(box, k){
+  var edge = box.dataset.edge || 'bottom';
+  var seed = 7 + k*13;
+  function rnd(){ seed = (seed*16807) % 2147483647; return seed/2147483647; }
+  var ph = rnd()*6, paper = [], photo = [];
+  for(var t=0; t<=100; t += 0.8 + rnd()*1.6){
+    var cut = 3 + Math.sin(t/9 + ph)*1.4 + Math.sin(t/3.1 + ph*2)*0.6 + rnd()*1.1;
+    photo.push([t, cut]);
+    paper.push([t, Math.max(0, cut - 1 - rnd()*1.6)]);
+  }
+  photo.push([100, photo[photo.length-1][1]]); paper.push([100, paper[paper.length-1][1]]);
+  function poly(arr){
+    var p = [];
+    if(edge === 'bottom'){ p.push('0% 0%','100% 0%'); arr.slice().reverse().forEach(function(a){ p.push(a[0]+'% '+(100-a[1])+'%'); }); }
+    if(edge === 'top'){ arr.forEach(function(a){ p.push(a[0]+'% '+a[1]+'%'); }); p.push('100% 100%','0% 100%'); }
+    if(edge === 'right'){ p.push('0% 0%'); arr.forEach(function(a){ p.push((100-a[1])+'% '+a[0]+'%'); }); p.push('0% 100%'); }
+    if(edge === 'left'){ p.push('100% 0%','100% 100%'); arr.slice().reverse().forEach(function(a){ p.push(a[1]+'% '+a[0]+'%'); }); }
+    return 'polygon(' + p.join(',') + ')';
+  }
+  box.style.clipPath = poly(paper);
+  box.querySelector('img').style.clipPath = poly(photo);
+});
+
+/* ============================================================
+   PERSONAS: cada nombre se convierte en un enlace automáticamente
+   ------------------------------------------------------------
+   - orcid: solo el número (0000-0000-0000-0000). Si lo dejas
+     vacío, el enlace abre una búsqueda de esa persona en ORCID.
+   - url:   (opcional) otra web; tiene prioridad sobre el ORCID.
+   - names: todas las formas en que aparece en la página.
+   Para añadir a alguien, copia una línea y cambia los datos.
+   ============================================================ */
+var PEOPLE = [
+  {name:"José Miguel Cerda-Paredes", orcid:"0000-0002-0087-5494", url:"", names:["Cerda-Paredes J.M.","Cerda J.M."]},
+  {name:"Javier Lopatin",            orcid:"", url:"https://www.javierlopatin.com/", names:["Javier Lopatin","Lopatin J."]},
+  {name:"Dylan Craven",              orcid:"", url:"https://www.dylancraven.com/", names:["Dylan Craven","Craven D."]},
+  {name:"Javier Pacheco-Labrador",   orcid:"0000-0003-3401-7081", url:"", names:["Javier Pacheco-Labrador","Pacheco-Labrador J."]},
+  {name:"Mauricio Galleguillos",     orcid:"0000-0003-4617-0980", url:"", names:["Mauricio Galleguillos","Galleguillos M."]},
+  {name:"Rosanna Ginocchio",         orcid:"0000-0003-4089-8188", url:"", names:["Rosanna Ginocchio","Ginocchio R."]},
+  {name:"José Miguel Fariña",        orcid:"", url:"", names:["José Miguel Fariña","Fariña J.M."]},
+  {name:"Patricio Ojeda",            orcid:"", url:"", names:["Patricio Ojeda","Ojeda F.P."]},
+  {name:"Mariana Díaz-Santana-Iturrios", orcid:"", url:"", names:["Mariana Díaz-Santana-Iturrios","Díaz-Santana-Iturrios M."]},
+  {name:"Camila Henríquez",          orcid:"", url:"", names:["Camila Henríquez"]},
+  {name:"Laura Pérez-Giraldo",             orcid:"0000-0001-9338-7432", url:"", names:["Pérez-Giraldo L.C.","Laura Pérez-Giraldo"]},
+  {name:"Amara Kimura",                    orcid:"", url:"", names:["Kimura A."]},
+  {name:"Adison Altamirano",                orcid:"", url:"https://www.altamiranoadison.com/", names:["Altamirano A."]},
+  {name:"Pablo Becerra",                   orcid:"0000-0002-2205-4478", url:"", names:["Becerra P.I.","Becerra P."]},
+  {name:"Cinnamon Dobbs",                     orcid:"0000-0001-9845-6660", url:"", names:["Dobbs C."]},
+  {name:"Alejandro Miranda",                   orcid:"0000-0002-8211-0179", url:"", names:["Miranda A."]},
+  {name:"Marcelo Miranda",                   orcid:"0000-0002-8386-4888", url:"", names:["Miranda M.D.","Miranda M."]},
+  {name:"Narkis Morales",                   orcid:"0000-0002-3942-1916", url:"", names:["Morales N.S.","Morales San Martín N."]},
+  {name:"Juan Ovalle",                    orcid:"0000-0002-8487-3487", url:"", names:["Ovalle J.F."]},
+  {name:"Alejandro Venegas-González",          orcid:"0000-0003-4568-4533", url:"", names:["Venegas-González A."]},
+  {name:"Carlos Zamorano-Elgueta",          orcid:"0000-0002-5588-3248", url:"", names:["Zamorano-Elgueta C."]},
+  {name:"Denis Berroeta",                  orcid:"", url:"https://scholar.google.com/citations?user=HlwGiMAAAAAJ&hl=es", names:["Berroeta D."]},
+  {name:"Vicente Vega",                      orcid:"", url:"", names:["Vega V."]},
+  {name:"Cristian Martinez-Villalobos", orcid:"0000-0001-7057-5553", url:"", names:["Martinez-Villalobos C."]},
+  {name:"Franco López",                     orcid:"", url:"", names:["López F."]}
+];
+
+/* ---------- convierte los nombres en enlaces (no hace falta tocar) ---------- */
+function linkPeople(root){
+  var lookup = {}, all = [];
+  PEOPLE.forEach(function(p){
+    var href = p.url || (p.orcid ? 'https://orcid.org/' + p.orcid
+             : 'https://orcid.org/orcid-search/search?searchQuery=' + encodeURIComponent(p.name));
+    p.names.forEach(function(n){ lookup[n] = href; all.push(n); });
+  });
+  all.sort(function(a,b){ return b.length - a.length; });
+  var esc = all.map(function(n){ return n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); });
+  var re = new RegExp('(^|[^\\p{L}])(' + esc.join('|') + ')(?![\\p{L}])', 'gu');
+  var skip = {A:1, SCRIPT:1, STYLE:1, TITLE:1, H1:1, H2:1, TEXTAREA:1};
+  var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode: function(node){
+      for(var el = node.parentNode; el && el.tagName !== 'MAIN'; el = el.parentNode){
+        if(skip[el.tagName] || el.namespaceURI === 'http://www.w3.org/2000/svg') return NodeFilter.FILTER_REJECT;
+      }
+      re.lastIndex = 0;
+      return re.test(node.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+    }
+  });
+  var nodes = []; while(walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(function(node){
+    var text = node.nodeValue, frag = document.createDocumentFragment(), last = 0, m;
+    re.lastIndex = 0;
+    while((m = re.exec(text))){
+      var start = m.index + m[1].length;
+      frag.appendChild(document.createTextNode(text.slice(last, start)));
+      var a = document.createElement('a');
+      a.className = 'person'; a.href = lookup[m[2]]; a.target = '_blank'; a.rel = 'noopener';
+      a.textContent = m[2];
+      frag.appendChild(a);
+      last = start + m[2].length;
+    }
+    frag.appendChild(document.createTextNode(text.slice(last)));
+    node.parentNode.replaceChild(frag, node);
+  });
+}
+linkPeople(document.querySelector('main'));
+
+/* ============================================================
+   BLOG: carga las entradas desde la carpeta blog/
+   ------------------------------------------------------------
+   Para publicar una entrada nueva:
+   1. Crea un archivo .md en blog/ (ej. blog/2026-12-01-mi-entrada.md)
+   2. Añade su ficha en blog/posts.json (archivo, título, fecha, etiqueta)
+   El orden (más reciente primero) se calcula solo con la fecha.
+   ============================================================ */
+(function(){
+  var TAGS = {opinion:'Opinión', comentario:'Comentario', recomendacion:'Recomendación'};
+  var box = document.getElementById('posts');
+  var status = document.getElementById('posts-status');
+  var fmt = new Intl.DateTimeFormat('es', {day:'numeric', month:'short', year:'numeric'});
+
+  function render(md){
+    if(window.marked) return marked.parse(md);
+    return md.split(/\n\s*\n/).map(function(p){
+      var t = p.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+      return /^#{1,6}\s/.test(t) ? '<h4>' + t.replace(/^#+\s*/,'') + '</h4>' : '<p>' + t + '</p>';
+    }).join('');
+  }
+
+  fetch('blog/posts.json', {cache:'no-cache'})
+    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(posts){
+      status.remove();
+      posts.sort(function(a,b){ return b.date.localeCompare(a.date); });
+      posts.forEach(function(p){
+        var d = document.createElement('details');
+        d.className = 'post'; d.dataset.tag = p.tag; d.id = 'post-' + p.file.replace(/\.md$/,'');
+        var when = fmt.format(new Date(p.date + 'T12:00:00'));
+        d.innerHTML = '<summary><time datetime="' + p.date + '">' + when + '</time>' +
+          '<span class="ttl-wrap"><span class="ttl"></span><br><span class="tag">' + (TAGS[p.tag] || p.tag) + '</span></span>' +
+          '<span class="plus" aria-hidden="true"></span></summary><div class="body"><p class="mute">Cargando…</p></div>';
+        d.querySelector('.ttl').textContent = p.title;
+        var loaded = false;
+        d.addEventListener('toggle', function(){
+          if(!d.open || loaded) return;
+          loaded = true;
+          var body = d.querySelector('.body');
+          fetch('blog/' + p.file, {cache:'no-cache'})
+            .then(function(r){ if(!r.ok) throw new Error(r.status); return r.text(); })
+            .then(function(md){ body.innerHTML = render(md); linkPeople(body); })
+            .catch(function(){ loaded = false; body.innerHTML = '<p class="mute">No se encontró el archivo blog/' + p.file + '. Revisa que el nombre coincida con posts.json.</p>'; });
+        });
+        box.appendChild(d);
+      });
+      setupFilter('blog-filter', '#posts > .post', 'data-tag', null);
+    })
+    .catch(function(){
+      status.textContent = 'No se pudieron cargar las entradas. Revisa que exista blog/posts.json y que su formato sea válido.';
+    });
+})();
 </script>
 </body>
 </html>
