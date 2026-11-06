@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog · José Miguel Cerda-Paredes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Mismos colores que index.html — si cambias el acento allí,
+   cámbialo también aquí.
+   ============================================================ */
+:root{
+  --paper:#E6E5E2;
+  --sheet:#F8F7F4;
+  --ink:#000000;
+  --night:#1D1D1D;
+  --mute:#6B6A66;
+  --accent:#2673C0;
+  --display:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --gutter:clamp(16px, 5vw, 72px);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:15px;line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:860px;margin:0 auto;padding:0 var(--gutter)}
+
+/* ---------- cabecera ---------- */
+.top{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid rgba(0,0,0,.12)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px;max-width:1200px}
+.top a{text-decoration:none;font-family:var(--display);font-weight:600;font-size:13px;font-variation-settings:"wdth" 110;letter-spacing:.02em}
+.top a:hover{color:var(--accent)}
+
+/* ---------- título de la entrada ---------- */
+.post-head{padding:clamp(48px,7vw,88px) 0 32px;border-bottom:2px solid var(--ink);margin-bottom:40px}
+.post-head .meta{font-size:13px;color:var(--mute);margin:0 0 14px}
+.post-head .tag{color:var(--accent)}
+.post-head h1{
+  font-family:var(--display);font-weight:800;margin:0;
+  font-size:clamp(2rem,5vw,3.2rem);line-height:1;font-variation-settings:"wdth" 120;letter-spacing:-.01em;
+}
+
+/* ---------- contenido ---------- */
+article{padding-bottom:80px}
+article p,article ul,article ol{max-width:68ch}
+article h2,article h3,article h4{
+  font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 115;line-height:1.15;
+  margin:2em 0 .6em;
+}
+article h2{font-size:1.6rem}
+article h3{font-size:1.25rem}
+article h4{font-size:1.05rem}
+article a{text-decoration-color:var(--accent);text-underline-offset:3px}
+article a:hover{color:var(--accent)}
+article img{display:block;max-width:100%;height:auto;margin:1.5em 0;background:#fff}
+article blockquote{margin:1.2em 0;padding-left:16px;border-left:3px solid var(--accent);color:var(--mute)}
+article table{border-collapse:collapse;font-size:13px;margin:1.2em 0;display:block;overflow-x:auto}
+article th,article td{border-bottom:1px solid rgba(0,0,0,.15);padding:6px 12px;text-align:left}
+article :not(pre) > code{background:rgba(0,0,0,.07);padding:1px 5px;font-size:.92em}
+
+/* ---------- bloques de código ---------- */
+.code{position:relative;margin:1.2em 0}
+.code pre{
+  margin:0;padding:18px 20px;overflow-x:auto;
+  background:var(--night);color:#E8E6E1;font-size:13.5px;line-height:1.6;
+}
+.code .lang{
+  position:absolute;top:0;left:0;padding:2px 10px;font-size:11px;
+  background:var(--accent);color:#fff;
+}
+.code.has-lang pre{padding-top:30px}
+.code .copy{
+  position:absolute;top:8px;right:8px;
+  font-family:var(--body);font-size:12px;padding:3px 10px;cursor:pointer;
+  background:transparent;color:#E8E6E1;border:1px solid rgba(255,255,255,.35);
+}
+.code .copy:hover{border-color:#fff}
+.code .copy.done{background:var(--accent);border-color:var(--accent);color:#fff}
+/* salida de R (bloques sin lenguaje, con "##") */
+.code.output pre{background:#F8F7F4;color:#3a3a38;border-left:3px solid var(--accent);font-size:12.5px}
+.code.output .copy{color:var(--ink);border-color:rgba(0,0,0,.3)}
+
+/* colores de sintaxis */
+.hljs-comment,.hljs-quote{color:#8F8D87;font-style:italic}
+.hljs-keyword,.hljs-literal{color:#7FB2E5}
+.hljs-string{color:#C3E88D}
+.hljs-number{color:#F2B27A}
+.hljs-built_in,.hljs-title.function_{color:#F0D47B}
+.hljs-operator,.hljs-punctuation{color:#E8E6E1}
+.hljs-params,.hljs-attr,.hljs-variable{color:#E8E6E1}
+
+.status{color:var(--mute);padding:80px 0}
+.back{display:inline-block;margin-top:48px;font-family:var(--display);font-weight:700;font-size:13px;text-decoration:none;border:2px solid currentColor;padding:10px 18px}
+.back:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a href="index.html#inicio">José Miguel Cerda-Paredes</a>
+    <a href="index.html#blog">← Volver al blog</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="post-head" id="head" hidden>
+    <p class="meta"><time id="date"></time> · <span class="tag" id="tag"></span></p>
+    <h1 id="title"></h1>
+  </div>
+  <article id="content"><p class="status">Cargando…</p></article>
+  <a class="back" href="index.html#blog">← Volver al blog</a>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/r.min.js"></script>
+<script>
+(function(){
+  var TAGS = {opinion:'Opinión', comentario:'Comentario', recomendacion:'Recomendación', tutorial:'Tutorial'};
+  var slug = new URLSearchParams(location.search).get('p') || '';
+  var content = document.getElementById('content');
+  var fmt = new Intl.DateTimeFormat('es', {day:'numeric', month:'long', year:'numeric'});
+
+  function fail(msg){ content.innerHTML = '<p class="status">' + msg + '</p>'; }
+  if(!/^[\w.-]+$/.test(slug)) return fail('No se indicó qué entrada mostrar.');
+
+  /* convierte cada bloque de código en una "ventana" con botón de copiar */
+  function decorateCode(root){
+    root.querySelectorAll('pre > code').forEach(function(code){
+      var pre = code.parentNode;
+      var m = (code.className || '').match(/language-([\w+-]+)/);
+      var lang = m ? m[1] : '';
+      var box = document.createElement('div');
+      box.className = 'code';
+      pre.parentNode.insertBefore(box, pre);
+      box.appendChild(pre);
+
+      if(!lang && /^\s*##/.test(code.textContent)){
+        box.classList.add('output');           // salida de R generada por knitr
+      } else {
+        if(lang){
+          box.classList.add('has-lang');
+          var label = document.createElement('span');
+          label.className = 'lang'; label.textContent = lang.toUpperCase() === 'R' ? 'R' : lang;
+          box.appendChild(label);
+        }
+        if(window.hljs){
+          if(lang && hljs.getLanguage(lang)) code.innerHTML = hljs.highlight(code.textContent, {language: lang}).value;
+          else if(!lang) hljs.highlightElement(code);
+        }
+      }
+
+      var btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'copy'; btn.textContent = 'Copiar';
+      btn.addEventListener('click', function(){
+        var text = code.textContent;
+        var done = function(){ btn.textContent = 'Copiado'; btn.classList.add('done');
+          setTimeout(function(){ btn.textContent = 'Copiar'; btn.classList.remove('done'); }, 1600); };
+        if(navigator.clipboard) navigator.clipboard.writeText(text).then(done, fallback);
+        else fallback();
+        function fallback(){
+          var t = document.createElement('textarea'); t.value = text; document.body.appendChild(t);
+          t.select(); try{ document.execCommand('copy'); done(); }catch(e){} t.remove();
+        }
+      });
+      box.appendChild(btn);
+    });
+  }
+
+  Promise.all([
+    fetch('blog/posts.json', {cache:'no-cache'}).then(function(r){ return r.ok ? r.json() : []; }).catch(function(){ return []; }),
+    fetch('blog/' + slug + '.md', {cache:'no-cache'}).then(function(r){ if(!r.ok) throw new Error(r.status); return r.text(); })
+  ]).then(function(res){
+    var info = res[0].filter(function(p){ return p.file.replace(/\.md$/,'') === slug; })[0] || {};
+    var md = res[1];
+
+    /* si el .md trae un título "# ..." al inicio (knitr lo pone), se usa y se quita del cuerpo */
+    var h1 = md.match(/^\s*#\s+(.+)\n/);
+    if(h1){ md = md.replace(h1[0], ''); }
+    var title = info.title || (h1 && h1[1]) || slug;
+
+    document.title = title + ' · José Miguel Cerda-Paredes';
+    document.getElementById('title').textContent = title;
+    if(info.date){
+      var d = document.getElementById('date');
+      d.dateTime = info.date; d.textContent = fmt.format(new Date(info.date + 'T12:00:00'));
+    }
+    document.getElementById('tag').textContent = TAGS[info.tag] || info.tag || '';
+    if(!info.date && !info.tag) document.querySelector('.meta').hidden = true;
+    document.getElementById('head').hidden = false;
+
+    content.innerHTML = window.marked ? marked.parse(md)
+      : '<pre><code>' + md.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</code></pre>';
+    decorateCode(content);
+  }).catch(function(){
+    fail('No se encontró la entrada <code>blog/' + slug + '.md</code>. Revisa el nombre del archivo.');
+  });
+})();
+</script>
+</body>
+</html>
