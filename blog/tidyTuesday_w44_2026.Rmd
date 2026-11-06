@@ -1,0 +1,50 @@
+---
+title: "TidyTuesday w44-2026"
+author: "José Miguel Cerda-Paredes"
+date: "2026-11-06"
+output: html_document
+---
+
+```{r}
+pacman::p_load(tidyverse, sf, rnaturalearth, cowplot)
+```
+### aefasd
+
+```{r, message = FALSE}
+base_url <- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-11-03/"
+
+values_raw     <- read_csv(str_c(base_url, "grambank_values.csv"))
+languages_raw  <- read_csv(str_c(base_url, "grambank_languages.csv"))
+parameters_raw <- read_csv(str_c(base_url, "grambank_parameters.csv"))
+```
+
+
+```{r}
+values_raw
+```
+
+
+```{r}
+languages_raw
+```
+
+
+```{r}
+parameters_raw
+```
+
+Así podemos ver cuáles son las preguntas que contienen el concepto *género*
+```{r}
+parameters_raw |>
+  filter(str_detect(feature_name, "gender")) |>
+  select(feature_name)
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
