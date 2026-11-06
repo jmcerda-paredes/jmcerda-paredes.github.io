@@ -1,25 +1,7 @@
 [
   {
-    "file": "2026-11-03-por-que-abro-este-blog.md",
-    "title": "Por qué abro este blog",
-    "date": "2026-11-03",
-    "tag": "opinion"
-  },
-  {
-    "file": "2026-10-20-comentario-articulo.md",
-    "title": "[Comentario sobre un artículo]",
-    "date": "2026-10-20",
-    "tag": "comentario"
-  },
-  {
-    "file": "2026-10-05-recomendacion.md",
-    "title": "[Recomendación: libro, curso o herramienta]",
-    "date": "2026-10-05",
-    "tag": "recomendacion"
-  },
-    {
     "file": "2026-11-06-tidytuesday-grambank.md",
-    "title": "[PRUEBA]",
+    "title": "TidyTuesday w44 (03-11-2026)",
     "date": "2026-10-05",
     "tag": "opinion"
   }
